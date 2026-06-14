@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grounding Toolkit</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
@@ -583,7 +584,7 @@
 
                             <div class="flex flex-col sm:flex-row gap-3 pt-2">
                                 <button onclick="shareJournalCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
-                                    📤 Share Entry to Journal App
+                                    🖼️ Save PNG Card
                                 </button>
                                 <button onclick="finishPractice()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
                                     Finish & Reset
@@ -742,7 +743,7 @@
 
                             <div class="flex flex-col sm:flex-row gap-3 pt-2">
                                 <button onclick="shareSensoryCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
-                                    📤 Share Entry to Journal App
+                                    🖼️ Save PNG Card
                                 </button>
                                 <button onclick="finishSensoryPractice()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
                                     Finish & Reset
@@ -810,7 +811,7 @@
 
                         <div class="flex flex-col sm:flex-row gap-3 pt-2">
                             <button onclick="shareBreathingCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2 shadow-sm">
-                                📤 Share to Journal App
+                                🖼️ Save PNG Card
                             </button>
                             <button onclick="finishBreathingPractice()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
                                 Finish & Reset
@@ -1000,42 +1001,39 @@
             }, 100);
         }
 
-        function shareJournalCard() {
-            const who = document.getElementById('card-who').innerText;
-            const when = document.getElementById('card-when').innerText;
-            const where = document.getElementById('card-where').innerText;
-            const doing = document.getElementById('card-doing').innerText;
-            const safe = document.getElementById('card-safe').innerText;
-            const reflection = document.getElementById('card-reflection').innerText;
-            const dateStr = document.getElementById('card-date').innerText;
+        async function exportCardAsPng(cardId, filename, shareTitle) {
+            const card = document.getElementById(cardId);
+            const canvas = await html2canvas(card, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                useCORS: true,
+                logging: false
+            });
+            return new Promise((resolve) => {
+                canvas.toBlob(async (blob) => {
+                    const file = new File([blob], filename, { type: 'image/png' });
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            await navigator.share({ files: [file], title: shareTitle });
+                            resolve();
+                            return;
+                        } catch (e) {
+                            if (e.name === 'AbortError') { resolve(); return; }
+                        }
+                    }
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    resolve();
+                }, 'image/png');
+            });
+        }
 
-            const textToShare = `🌳 Grounding Practice Entry (${dateStr})\n\n` +
-                                `1. Who am I? ${who}\n` +
-                                `2. When am I? ${when}\n` +
-                                `3. Where am I? ${where}\n` +
-                                `4. What am I doing? ${doing}\n` +
-                                `5. Am I safe right now? ${safe}\n\n` +
-                                `Reflection:\n"${reflection}"\n\n` +
-                                `Shared from Grounding Toolkit.`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'My Grounding Practice Entry',
-                    text: textToShare
-                }).catch(() => {});
-            } else {
-                const el = document.createElement('textarea');
-                el.value = textToShare;
-                document.body.appendChild(el);
-                el.select();
-                try {
-                    document.execCommand('copy');
-                    alert("Grounding entry copied to clipboard! Open your journal app and paste it.");
-                } catch(err) {
-                    console.error("Clipboard export failed", err);
-                }
-                document.body.removeChild(el);
-            }
+        async function shareJournalCard() {
+            await exportCardAsPng('journal-card', 'grounding-entry.png', 'My Grounding Practice Entry');
         }
 
         function finishPractice() {
@@ -1150,42 +1148,8 @@
             }, 100);
         }
 
-        function shareSensoryCard() {
-            const see = document.getElementById('s-card-see').innerText;
-            const touch = document.getElementById('s-card-touch').innerText;
-            const hear = document.getElementById('s-card-hear').innerText;
-            const smell = document.getElementById('s-card-smell').innerText;
-            const taste = document.getElementById('s-card-taste').innerText;
-            const reflection = document.getElementById('s-card-reflection').innerText;
-            const dateStr = document.getElementById('s-card-date').innerText;
-
-            const textToShare = `🌳 5-4-3-2-1 Sensory Grounding Entry (${dateStr})\n\n` +
-                                `👀 See (5): ${see}\n` +
-                                `✋ Touch (4): ${touch}\n` +
-                                `👂 Hear (3): ${hear}\n` +
-                                `👃 Smell (2): ${smell}\n` +
-                                `👅 Taste (1): ${taste}\n\n` +
-                                `Reflection:\n"${reflection}"\n\n` +
-                                `Shared from Grounding Toolkit.`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'My Sensory Grounding Practice Entry',
-                    text: textToShare
-                }).catch(() => {});
-            } else {
-                const el = document.createElement('textarea');
-                el.value = textToShare;
-                document.body.appendChild(el);
-                el.select();
-                try {
-                    document.execCommand('copy');
-                    alert("Grounding entry copied to clipboard! Open your journal app and paste it.");
-                } catch(err) {
-                    console.error("Clipboard export failed", err);
-                }
-                document.body.removeChild(el);
-            }
+        async function shareSensoryCard() {
+            await exportCardAsPng('sensory-journal-card', 'sensory-grounding-entry.png', 'My Sensory Grounding Entry');
         }
 
         function finishSensoryPractice() {
@@ -1284,32 +1248,8 @@
             }, 100);
         }
 
-        function shareBreathingCard() {
-            const reflection = document.getElementById('b-card-reflection').innerText;
-            const dateStr = document.getElementById('b-card-date').innerText;
-
-            const textToShare = `🌬️ Rhythmic Breathing Practice Entry (${dateStr})\n\n` +
-                                `Reflection:\n"${reflection}"\n\n` +
-                                `Shared from Grounding Toolkit.`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'My Breathing Practice Entry',
-                    text: textToShare
-                }).catch(() => {});
-            } else {
-                const el = document.createElement('textarea');
-                el.value = textToShare;
-                document.body.appendChild(el);
-                el.select();
-                try {
-                    document.execCommand('copy');
-                    alert("Grounding entry copied to clipboard! Open your journal app and paste it.");
-                } catch(err) {
-                    console.error("Clipboard export failed", err);
-                }
-                document.body.removeChild(el);
-            }
+        async function shareBreathingCard() {
+            await exportCardAsPng('breathing-journal-card', 'breathing-entry.png', 'My Breathing Practice Entry');
         }
 
         function finishBreathingPractice() {
