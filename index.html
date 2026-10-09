@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grounding Toolkit</title>
+    <title>Coping Toolkit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
                         <rect width="40" height="40" rx="12" fill="#234736"/>
                         <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
                     </svg>
-                    <span class="font-bold text-2xl tracking-tight text-stone-900 serif-font">Grounding<span class="text-stone-400 font-light italic">Toolkit</span></span>
+                    <span class="font-bold text-2xl tracking-tight text-stone-900 serif-font">Coping<span class="text-stone-400 font-light italic">Toolkit</span></span>
                 </div>
                 <div class="hidden lg:flex space-x-6 text-sm tracking-wide font-medium text-stone-500">
                     <button data-target="overview" class="nav-btn nav-link active py-7 border-b-2 border-transparent hover:text-stone-900 transition-colors">Overview</button>
@@ -134,35 +134,109 @@
     <main class="flex-grow w-full max-w-5xl mx-auto px-6 py-12 md:py-20">
 
         <section id="overview" class="view-section block animate-fade-in">
-            <div class="max-w-3xl mx-auto text-center space-y-8">
-                <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">Anchoring to the Present <br><span class="text-[#8c7e6e] italic">When Overwhelmed</span></h1>
-                
-                <div class="text-left bg-[#faf6f0] p-8 md:p-10 rounded-3xl border border-[#e4dcd0]/60 mt-10 shadow-sm">
-                    <p class="text-base text-stone-600 leading-relaxed mb-6">
-                        This interactive grounding practice exercises. Grounding is a psychological technique designed to help individuals anchor themselves firmly in the present moment, particularly during episodes of intense emotional overwhelm, anxiety, or dissociation.
-                    </p>
-                    <p class="text-base text-stone-600 leading-relaxed">
-                        By completing the specific exercises and engaging the physical senses, the brain's focus is redirected from internal distress to external reality. Explore the anchors below, use the identity-focused guided practice, or step through the comprehensive physical senses exploration.
+            <div class="max-w-4xl mx-auto space-y-14">
+                <div class="text-center space-y-6">
+                    <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">Your Coping Toolkit <br><span class="text-[#8c7e6e] italic">for hard moments and everyday life</span></h1>
+                    <p class="text-base md:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto">
+                        This toolkit holds two kinds of skills. Grounding skills calm your body and bring you back to the present when feelings get too big. CBT skills help you notice your thoughts, check them against the facts, and find more balanced ways to see things.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-                    <div class="bg-white p-8 rounded-2xl border border-[#e4dcd0]/50 shadow-sm">
-                        <div class="text-2xl mb-4 text-[#8c7e6e]">🌬️</div>
-                        <h3 class="font-normal text-xl text-stone-900 mb-2">Breathe</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">The process begins with a slow, deliberate breath to reset the autonomic nervous system.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl border border-[#e4dcd0]/50 shadow-sm">
-                        <div class="text-2xl mb-4 text-[#8c7e6e]">🗣️</div>
-                        <h3 class="font-normal text-xl text-stone-900 mb-2">Vocalize</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">Saying the answers out loud reinforces the cognitive shift and auditory grounding.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl border border-[#e4dcd0]/50 shadow-sm">
-                        <div class="text-2xl mb-4 text-[#8c7e6e]">🔁</div>
-                        <h3 class="font-normal text-xl text-stone-900 mb-2">Repeat</h3>
-                        <p class="text-sm text-stone-500 leading-relaxed">The cycle is repeated continuously until a baseline state of calm is achieved.</p>
+                <div class="bg-[#faf6f0] p-6 md:p-8 rounded-3xl border border-[#e4dcd0]/60 shadow-sm">
+                    <h2 class="text-xl md:text-2xl font-normal text-stone-900 mb-4">Not sure where to start?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-stone-600 leading-relaxed">
+                        <div class="bg-white/70 p-5 rounded-2xl border border-[#e4dcd0]/50">
+                            <p class="font-semibold text-stone-800 mb-1">Feeling overwhelmed right now?</p>
+                            <p>Start with a grounding skill. Try <button data-home-target="breathing" class="home-link underline decoration-[#8c7e6e] underline-offset-2 hover:text-stone-900">Bubble Breathing</button> or <button data-home-target="sensory" class="home-link underline decoration-[#8c7e6e] underline-offset-2 hover:text-stone-900">5-4-3-2-1 Sensory Grounding</button> to settle your body first.</p>
+                        </div>
+                        <div class="bg-white/70 p-5 rounded-2xl border border-[#e4dcd0]/50">
+                            <p class="font-semibold text-stone-800 mb-1">Calm enough to think it through?</p>
+                            <p>Use a CBT skill. A <button data-home-target="thought-record" class="home-link underline decoration-[#8c7e6e] underline-offset-2 hover:text-stone-900">Thought Record</button> helps you slow down an upsetting thought and look at it from every side.</p>
+                        </div>
                     </div>
                 </div>
+
+                <div>
+                    <div class="mb-6">
+                        <p class="text-xs uppercase tracking-widest text-[#8c7e6e] font-semibold mb-2">Grounding skills</p>
+                        <h2 class="text-2xl md:text-3xl font-normal text-stone-900">Calm your body in the moment</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <button data-home-target="education" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">📖</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Grounding Guide</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Learn what grounding is and why focusing on your senses and breath helps when emotions feel too strong.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Read the guide →</span>
+                        </button>
+                        <button data-home-target="practice" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">⚓</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Anchoring</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Answer simple questions about who you are, where you are, and what today is, one step at a time. Say your answers out loud.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Start anchoring →</span>
+                        </button>
+                        <button data-home-target="sensory" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🖐️</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">5-4-3-2-1 Sensory Grounding</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Notice five things you see, four you feel, three you hear, two you smell, and one you taste to pull your focus back to the room around you.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Use your senses →</span>
+                        </button>
+                        <button data-home-target="breathing" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🫧</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Bubble Breathing</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Breathe along with a growing and shrinking bubble. Slow, steady breathing tells your body it is safe to relax.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Breathe with me →</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-6">
+                        <p class="text-xs uppercase tracking-widest text-[#8c7e6e] font-semibold mb-2">CBT skills</p>
+                        <h2 class="text-2xl md:text-3xl font-normal text-stone-900">Work with your thoughts</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <button data-home-target="cbt-guide" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🧭</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">CBT Guide</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">See how your thoughts, feelings, and actions connect, and learn about automatic thoughts, rules, and core beliefs.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Read the guide →</span>
+                        </button>
+                        <button data-home-target="thought-record" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">📝</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Thought Record</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Catch an upsetting thought, look at the evidence for and against it, and find a more balanced way to see things.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Start a record →</span>
+                        </button>
+                        <button data-home-target="test-thoughts" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🔍</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Testing Your Thoughts</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">A simpler, one-question-at-a-time way to check whether a thought really holds up to the facts.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Test a thought →</span>
+                        </button>
+                        <button data-home-target="core-belief" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🌱</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Core Belief Worksheet</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Loosen an old, harsh belief about yourself and collect everyday evidence for a kinder, more balanced one.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Open the worksheet →</span>
+                        </button>
+                        <button data-home-target="coping-cards" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🃏</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Coping Cards</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Write short, personal reminders you can save to your phone and read whenever a hard thought or situation shows up.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Make a card →</span>
+                        </button>
+                        <a href="https://thought-journal-990262847515.us-west2.run.app" target="_blank" rel="noopener" class="group block text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">📔</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Thought Journal</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Keep a running journal of your thoughts and feelings over time. Opens in a new tab.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Open the journal ↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="text-center text-sm text-stone-500 leading-relaxed max-w-2xl mx-auto">
+                    You can come back to any skill from the menu at the top of the page. Your worksheets are saved on this device, and you can share a summary card with your therapist if you choose.
+                </p>
             </div>
         </section>
 
@@ -2022,7 +2096,7 @@
     </main>
 
     <footer class="bg-stone-900 text-stone-400 py-12 text-center mt-auto border-t border-stone-800">
-        <p class="text-sm tracking-wide">Interactive grounding exercises!</p>
+        <p class="text-sm tracking-wide">Grounding and CBT skills for coping, wherever you are.</p>
         <p class="text-xs mt-3 opacity-40 max-w-xs mx-auto leading-relaxed">Not a substitute for mental health treatment or advice of a licensed professional.</p>
     </footer>
 
@@ -2090,6 +2164,13 @@
             btn.addEventListener('click', (e) => {
                 const target = e.currentTarget.getAttribute('data-target');
                 navigateTo(target);
+            });
+        });
+
+        document.querySelectorAll('.home-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                navigateTo(e.currentTarget.getAttribute('data-home-target'));
+                window.scrollTo({ top: 0 });
             });
         });
 
