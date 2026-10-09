@@ -45,6 +45,12 @@
         #breathingCircle {
             transition: transform cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease, color 0.5s ease;
         }
+
+        /* CBT Skills rating sliders */
+        .cbt-range {
+            accent-color: #8c7e6e;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -78,6 +84,18 @@
                             </a>
                         </div>
                     </div>
+                    <div class="relative" id="cbt-dropdown-container">
+                        <button id="cbt-menu-btn" class="nav-link py-7 border-b-2 border-transparent hover:text-stone-900 transition-colors flex items-center gap-1">
+                            CBT Skills
+                            <svg class="w-3 h-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="cbt-dropdown" class="hidden absolute top-full right-0 mt-0 bg-white border border-[#e4dcd0] rounded-xl shadow-lg py-2 min-w-[210px] z-50">
+                            <button data-target="thought-record" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Thought Record</button>
+                            <button data-target="test-thoughts" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Testing Your Thoughts</button>
+                            <button data-target="core-belief" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Core Belief Worksheet</button>
+                            <button data-target="coping-cards" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Coping Cards</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="lg:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 text-2xl">☰</button>
@@ -97,6 +115,15 @@
                         Thought Journal
                         <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
+                </div>
+            </div>
+            <div class="pt-1">
+                <p class="text-xs uppercase tracking-widest text-stone-400 font-semibold mb-2">CBT Skills</p>
+                <div class="pl-3 space-y-1 border-l border-[#e4dcd0]">
+                    <button data-target="thought-record" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Thought Record</button>
+                    <button data-target="test-thoughts" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Testing Your Thoughts</button>
+                    <button data-target="core-belief" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Core Belief Worksheet</button>
+                    <button data-target="coping-cards" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Coping Cards</button>
                 </div>
             </div>
         </div>
@@ -822,6 +849,762 @@
             </div>
         </section>
 
+        <section id="thought-record" class="view-section hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-normal text-stone-900 mb-4">Thought Record</h2>
+                    <p class="text-stone-600 text-base">
+                        Catch an upsetting thought, look at it from every side, and find a more balanced way to see things — one column at a time.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-[#e4dcd0] p-8 md:p-14 relative overflow-hidden">
+
+                    <div id="tr-step-0" class="tr-step text-center space-y-8">
+                        <div class="w-28 h-28 bg-[#faf6f0] border border-[#e4dcd0]/70 rounded-full mx-auto flex items-center justify-center breathe-animation">
+                            <span class="text-3xl">📝</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-normal text-stone-900 mb-3">Catch the Thought</h3>
+                            <p class="text-stone-500 text-sm leading-relaxed">Use this when you notice your mood getting worse. Ask yourself: <em>"What's going through my mind right now?"</em> We'll walk through each column of the Thought Record one at a time.</p>
+                        </div>
+                        <button onclick="cbtGoTo('tr', 1)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-stone-800 transition-colors shadow-sm">Begin Thought Record</button>
+                    </div>
+
+                    <div id="tr-step-1" class="tr-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">1</span>
+                            <span>The Situation</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">📍 When and where? What happened?</h3>
+                        <p class="text-sm text-stone-500">Describe the moment your mood shifted. Stick to the facts, like a camera would see it.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="tr-when" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="When and where? (e.g., Tuesday night, at home)">
+                            <textarea id="tr-situation" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="What happened? (e.g., My friend didn't answer my text all day.)"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tr', 0)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tr', 2)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tr-step-2" class="tr-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">2</span>
+                            <span>Automatic Thought</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">💭 What went through my mind?</h3>
+                        <p class="text-sm text-stone-500">Write the thought exactly as it showed up, then rate how much you believe it.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tr-thought" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., “She's mad at me. I always mess things up.”"></textarea>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How much do I believe it?</span>
+                                    <span id="tr-thought-belief-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="tr-thought-belief" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tr', 1)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tr', 3)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tr-step-3" class="tr-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">3</span>
+                            <span>Feelings</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">💗 What did I feel?</h3>
+                        <p class="text-sm text-stone-500">Name the emotion(s) — sad, anxious, angry, ashamed — and how strong it is.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="tr-feeling" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="e.g., Anxious, sad">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How strong? (0–100)</span>
+                                    <span id="tr-feeling-strength-val" class="font-semibold text-stone-800">50</span>
+                                </div>
+                                <input type="range" id="tr-feeling-strength" min="0" max="100" step="5" value="50" data-unit="" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tr', 2)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tr', 4)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tr-step-4" class="tr-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">4</span>
+                            <span>Balanced View</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">⚖️ A more balanced way to see it</h3>
+                        <p class="text-sm text-stone-500">Use the questions below to find a fairer, more complete view. Then rate how much you believe it.</p>
+                        <div class="bg-[#faf6f0] border border-[#e4dcd0]/60 rounded-2xl p-5">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-3">Questions to help with the balanced view</p>
+                            <ol class="list-decimal pl-5 space-y-1.5 text-sm text-stone-600">
+                                <li>What facts support this thought? What facts don't?</li>
+                                <li>Is there another way to look at this?</li>
+                                <li>What's the worst that could happen, and how would I get through it? What's the best? What's most likely?</li>
+                                <li>What happens if I keep believing this thought? What could happen if I changed it?</li>
+                                <li>What would I tell a friend or relative in the same spot?</li>
+                                <li>What can I do about it now?</li>
+                            </ol>
+                        </div>
+                        <div class="space-y-4">
+                            <textarea id="tr-balanced" class="w-full h-32 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., “She's been busy at work this week. She usually texts back by evening. One missed text doesn't mean she's mad.”"></textarea>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How much do I believe it?</span>
+                                    <span id="tr-balanced-belief-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="tr-balanced-belief" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tr', 3)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tr', 5)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tr-step-5" class="tr-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">5</span>
+                            <span>Outcome</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🌱 Where am I now?</h3>
+                        <p class="text-sm text-stone-500">Re-rate the first thought and the feeling, and decide on one thing you will do.</p>
+                        <div class="space-y-4 mt-6">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>Now: how much do I believe the first thought?</span>
+                                    <span id="tr-after-belief-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="tr-after-belief" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>Now: how strong is the feeling? (0–100)</span>
+                                    <span id="tr-after-strength-val" class="font-semibold text-stone-800">50</span>
+                                </div>
+                                <input type="range" id="tr-after-strength" min="0" max="100" step="5" value="50" data-unit="" class="cbt-range w-full">
+                            </div>
+                            <textarea id="tr-action" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="What will I do? (e.g., Text her tomorrow and ask how her week is going.)"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button onclick="cbtGoTo('tr', 4)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="generateThoughtRecordCard()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors shadow-sm flex-1">Generate Journal Card</button>
+                        </div>
+                        <div id="tr-card-preview-container" class="hidden mt-10 border border-[#e4dcd0] rounded-3xl p-6 bg-[#faf6f0]/40 space-y-4">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Preview of Your Entry</p>
+
+                            <div id="thought-record-card" class="bg-white border border-[#e4dcd0] rounded-2xl p-6 relative overflow-hidden text-left shadow-sm">
+                                <div class="absolute top-[16px] right-[16px] opacity-15">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#234736"/>
+                                        <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
+                                    </svg>
+                                </div>
+                                <div class="border-b border-[#e4dcd0]/60 pb-3 mb-4">
+                                    <h4 class="text-xl font-normal text-stone-900 serif-font pr-12">Thought Record Entry</h4>
+                                    <p class="text-[10px] text-stone-400 uppercase tracking-wider font-semibold mt-1" id="tr-card-date"></p>
+                                </div>
+                                <div class="space-y-3 mb-5 text-xs text-stone-600 leading-relaxed">
+                                    <p class="whitespace-pre-line"><strong>📍 Situation:</strong> <span id="tr-card-situation" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>💭 Automatic Thought:</strong> <span id="tr-card-thought" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>💗 Feelings:</strong> <span id="tr-card-feeling" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>⚖️ Balanced View:</strong> <span id="tr-card-balanced" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>📉 After:</strong> <span id="tr-card-after" class="text-stone-800 font-medium"></span></p>
+                                </div>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl border border-[#e4dcd0]/50 mb-4">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">What I Will Do</p>
+                                    <p class="text-stone-700 italic text-sm leading-relaxed whitespace-pre-line" id="tr-card-action"></p>
+                                </div>
+                                <p class="text-[9px] text-center text-stone-400 font-medium tracking-widest uppercase">✦ THOUGHT JOURNAL CBT SKILLS</p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="shareThoughtRecordCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
+                                    🖼️ Save Card
+                                </button>
+                                <button onclick="finishThoughtRecord()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Finish & Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center border-t border-stone-100 pt-6">
+                        <div class="text-[10px] font-bold text-stone-400 tracking-widest uppercase" id="tr-progress-text">Step 0 of 5</div>
+                        <div class="w-32 h-1 bg-stone-100 rounded-full overflow-hidden">
+                            <div id="tr-progress-bar" class="h-full bg-[#8c7e6e] w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="test-thoughts" class="view-section hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-normal text-stone-900 mb-4">Testing Your Thoughts</h2>
+                    <p class="text-stone-600 text-base">
+                        A simpler, one-question-at-a-time way to check whether a thought holds up to the facts.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-[#e4dcd0] p-8 md:p-14 relative overflow-hidden">
+
+                    <div id="tt-step-0" class="tt-step text-center space-y-8">
+                        <div class="w-28 h-28 bg-[#faf6f0] border border-[#e4dcd0]/70 rounded-full mx-auto flex items-center justify-center breathe-animation">
+                            <span class="text-3xl">🔍</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-normal text-stone-900 mb-3">Test the Thought</h3>
+                            <p class="text-stone-500 text-sm leading-relaxed">A simpler version of the Thought Record. Answer one question at a time — there are no wrong answers.</p>
+                        </div>
+                        <button onclick="cbtGoTo('tt', 1)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-stone-800 transition-colors shadow-sm">Begin</button>
+                    </div>
+
+                    <div id="tt-step-1" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">1</span>
+                            <span>What Happened</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">📍 What happened?</h3>
+                        <p class="text-sm text-stone-500">Briefly describe the moment that upset you.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-situation" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., My boss asked to meet tomorrow and didn't say why."></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 0)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 2)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-2" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">2</span>
+                            <span>The Thought</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">💭 What went through my mind?</h3>
+                        <p class="text-sm text-stone-500">Write the thought, then rate how much you believe it.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-thought" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., “I'm going to get fired.”"></textarea>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How much do I believe it?</span>
+                                    <span id="tt-thought-belief-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="tt-thought-belief" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 1)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 3)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-3" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">3</span>
+                            <span>The Feeling</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">💗 What did I feel?</h3>
+                        <p class="text-sm text-stone-500">Name the feeling and how strong it is.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="tt-feeling" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="e.g., Scared">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How strong? (0–100)</span>
+                                    <span id="tt-feeling-strength-val" class="font-semibold text-stone-800">50</span>
+                                </div>
+                                <input type="range" id="tt-feeling-strength" min="0" max="100" step="5" value="50" data-unit="" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 2)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 4)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-4" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">4</span>
+                            <span>Test 1 of 6 · Facts For</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">✅ Facts that support it</h3>
+                        <p class="text-sm text-stone-500">What actually happened that backs this thought up? Facts only — not feelings.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-test-1" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., I did forget to reply to her last week."></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 3)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 5)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-5" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">5</span>
+                            <span>Test 2 of 6 · Facts Against</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">❌ Facts that don't support it</h3>
+                        <p class="text-sm text-stone-500">What facts don't fit the thought? Small things count.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-test-2" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., She invited me to lunch on Friday."></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 4)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 6)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-6" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">6</span>
+                            <span>Test 3 of 6 · Another View</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🔄 Another way to see it</h3>
+                        <p class="text-sm text-stone-500">Is there a different explanation for what happened?</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-test-3" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., She might just be swamped at work."></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 5)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 7)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-7" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">7</span>
+                            <span>Test 4 of 6 · Outcomes</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🧭 Worst / best / most likely</h3>
+                        <p class="text-sm text-stone-500">What's the worst that could happen, and how would you cope? The best? What's most likely?</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-test-4" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., Worst: she's upset and we talk it through. Best: she was busy. Most likely: she texts tonight."></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 6)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 8)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-8" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">8</span>
+                            <span>Test 5 of 6 · A Friend</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🤝 What I'd tell a friend</h3>
+                        <p class="text-sm text-stone-500">If a friend had this exact thought, what would you say to them?</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-test-5" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., “One quiet day doesn't undo your friendship.”"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 7)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 9)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-9" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">9</span>
+                            <span>Test 6 of 6 · Next Step</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">👣 What I can do now</h3>
+                        <p class="text-sm text-stone-500">What is one thing within your control right now?</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="tt-test-6" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., Make dinner and check my phone after."></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('tt', 8)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('tt', 10)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="tt-step-10" class="tt-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">10</span>
+                            <span>After Testing It</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🌱 Where am I now?</h3>
+                        <p class="text-sm text-stone-500">Now that you've tested the thought, re-rate it.</p>
+                        <div class="space-y-4 mt-6">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How much do I believe the first thought now?</span>
+                                    <span id="tt-after-belief-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="tt-after-belief" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How strong is the feeling now? (0–100)</span>
+                                    <span id="tt-after-strength-val" class="font-semibold text-stone-800">50</span>
+                                </div>
+                                <input type="range" id="tt-after-strength" min="0" max="100" step="5" value="50" data-unit="" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button onclick="cbtGoTo('tt', 9)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="generateTestThoughtsCard()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors shadow-sm flex-1">Generate Journal Card</button>
+                        </div>
+                        <div id="tt-card-preview-container" class="hidden mt-10 border border-[#e4dcd0] rounded-3xl p-6 bg-[#faf6f0]/40 space-y-4">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Preview of Your Entry</p>
+
+                            <div id="test-thoughts-card" class="bg-white border border-[#e4dcd0] rounded-2xl p-6 relative overflow-hidden text-left shadow-sm">
+                                <div class="absolute top-[16px] right-[16px] opacity-15">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#234736"/>
+                                        <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
+                                    </svg>
+                                </div>
+                                <div class="border-b border-[#e4dcd0]/60 pb-3 mb-4">
+                                    <h4 class="text-xl font-normal text-stone-900 serif-font pr-12">Testing My Thoughts Entry</h4>
+                                    <p class="text-[10px] text-stone-400 uppercase tracking-wider font-semibold mt-1" id="tt-card-date"></p>
+                                </div>
+                                <div class="space-y-3 mb-5 text-xs text-stone-600 leading-relaxed">
+                                    <p class="whitespace-pre-line"><strong>📍 What Happened:</strong> <span id="tt-card-situation" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>💭 The Thought:</strong> <span id="tt-card-thought" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>💗 The Feeling:</strong> <span id="tt-card-feeling" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>✅ Facts that support it:</strong> <span id="tt-card-test-1" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>❌ Facts that don't support it:</strong> <span id="tt-card-test-2" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>🔄 Another way to see it:</strong> <span id="tt-card-test-3" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>🧭 Worst / best / most likely:</strong> <span id="tt-card-test-4" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>🤝 What I'd tell a friend:</strong> <span id="tt-card-test-5" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>👣 What I can do now:</strong> <span id="tt-card-test-6" class="text-stone-800 font-medium"></span></p>
+                                </div>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl border border-[#e4dcd0]/50 mb-4">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">After Testing It</p>
+                                    <p class="text-stone-700 italic text-sm leading-relaxed whitespace-pre-line" id="tt-card-after"></p>
+                                </div>
+                                <p class="text-[9px] text-center text-stone-400 font-medium tracking-widest uppercase">✦ THOUGHT JOURNAL CBT SKILLS</p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="shareTestThoughtsCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
+                                    🖼️ Save Card
+                                </button>
+                                <button onclick="finishTestThoughts()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Finish & Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center border-t border-stone-100 pt-6">
+                        <div class="text-[10px] font-bold text-stone-400 tracking-widest uppercase" id="tt-progress-text">Step 0 of 10</div>
+                        <div class="w-32 h-1 bg-stone-100 rounded-full overflow-hidden">
+                            <div id="tt-progress-bar" class="h-full bg-[#8c7e6e] w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="core-belief" class="view-section hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-normal text-stone-900 mb-4">Core Belief Worksheet</h2>
+                    <p class="text-stone-600 text-base">
+                        An ongoing log for loosening an old belief about yourself and building a new, more balanced one.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-[#e4dcd0] p-8 md:p-14 relative overflow-hidden">
+
+                    <div id="cb-step-0" class="cb-step text-center space-y-8">
+                        <div class="w-28 h-28 bg-[#faf6f0] border border-[#e4dcd0]/70 rounded-full mx-auto flex items-center justify-center breathe-animation">
+                            <span class="text-3xl">🌳</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-normal text-stone-900 mb-3">Build a New Belief</h3>
+                            <p class="text-stone-500 text-sm leading-relaxed">This is an ongoing log. Keep it going for weeks, adding to it a little each day. Old beliefs hang on because we notice what fits them and brush off what doesn't. This log helps you catch what you've been brushing off.</p>
+                        </div>
+                        <p id="cb-resume-note" class="hidden text-xs text-[#8c7e6e] font-medium">Your log is saved on this device — pick up where you left off.</p>
+                        <button onclick="cbtGoTo('cb', 1)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-stone-800 transition-colors shadow-sm">Open My Log</button>
+                    </div>
+
+                    <div id="cb-step-1" class="cb-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">1</span>
+                            <span>Old Belief</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🪨 My old belief</h3>
+                        <p class="text-sm text-stone-500">The belief about yourself you'd like to loosen. Rate how strongly you hold it.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="cb-old" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="e.g., “I'm a failure.”">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How much do I believe it right now?</span>
+                                    <span id="cb-old-now-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="cb-old-now" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>The most I believed it this week?</span>
+                                    <span id="cb-old-most-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="cb-old-most" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>The least I believed it this week?</span>
+                                    <span id="cb-old-least-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="cb-old-least" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('cb', 0)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('cb', 2)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="cb-step-2" class="cb-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">2</span>
+                            <span>New Belief</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🌱 A new, more balanced belief</h3>
+                        <p class="text-sm text-stone-500">Something fairer and more realistic — it doesn't need to feel true yet.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="cb-new" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="e.g., “I'm a capable person who sometimes makes mistakes.”">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>How much do I believe it right now?</span>
+                                    <span id="cb-new-now-val" class="font-semibold text-stone-800">50%</span>
+                                </div>
+                                <input type="range" id="cb-new-now" min="0" max="100" step="5" value="50" data-unit="%" class="cbt-range w-full">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('cb', 1)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('cb', 3)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="cb-step-3" class="cb-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">3</span>
+                            <span>Evidence Log</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">📒 Collect the evidence</h3>
+                        <p class="text-sm text-stone-500">Add a little each day. Small things count.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-5 space-y-3">
+                                <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Supports the NEW belief</p>
+                                <textarea id="cb-new-evidence" class="w-full h-20 p-3 border border-stone-200 rounded-xl focus:border-stone-900 outline-none bg-white resize-none text-stone-700 text-sm leading-relaxed transition-all" placeholder="e.g., Got the kids to school on time all week."></textarea>
+                                <button onclick="addCoreBeliefEvidence('new')" class="w-full bg-stone-900 text-[#fcfbfa] px-4 py-2.5 rounded-full text-[11px] uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">+ Add Evidence</button>
+                                <ul id="cb-new-list" class="space-y-2 text-sm text-stone-700"></ul>
+                            </div>
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-5 space-y-3">
+                                <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Seems to support the OLD belief</p>
+                                <textarea id="cb-old-evidence" class="w-full h-16 p-3 border border-stone-200 rounded-xl focus:border-stone-900 outline-none bg-white resize-none text-stone-700 text-sm leading-relaxed transition-all" placeholder="e.g., Forgot to pay a bill."></textarea>
+                                <textarea id="cb-old-reframe" class="w-full h-16 p-3 border border-stone-200 rounded-xl focus:border-stone-900 outline-none bg-white resize-none text-stone-700 text-sm leading-relaxed transition-all" placeholder="A different way to see it: e.g., That's one mistake. It doesn't make me a failure."></textarea>
+                                <button onclick="addCoreBeliefEvidence('old')" class="w-full bg-stone-900 text-[#fcfbfa] px-4 py-2.5 rounded-full text-[11px] uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">+ Add & Reframe</button>
+                                <ul id="cb-old-list" class="space-y-2 text-sm text-stone-700"></ul>
+                            </div>
+                        </div>
+                        <p class="text-xs text-stone-400 italic">Your log saves automatically on this device so you can keep adding to it over the coming weeks.</p>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button onclick="cbtGoTo('cb', 2)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="generateCoreBeliefCard()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors shadow-sm flex-1">Generate Journal Card</button>
+                        </div>
+                        <div id="cb-card-preview-container" class="hidden mt-10 border border-[#e4dcd0] rounded-3xl p-6 bg-[#faf6f0]/40 space-y-4">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Preview of Your Entry</p>
+
+                            <div id="core-belief-card" class="bg-white border border-[#e4dcd0] rounded-2xl p-6 relative overflow-hidden text-left shadow-sm">
+                                <div class="absolute top-[16px] right-[16px] opacity-15">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#234736"/>
+                                        <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
+                                    </svg>
+                                </div>
+                                <div class="border-b border-[#e4dcd0]/60 pb-3 mb-4">
+                                    <h4 class="text-xl font-normal text-stone-900 serif-font pr-12">Core Belief Log</h4>
+                                    <p class="text-[10px] text-stone-400 uppercase tracking-wider font-semibold mt-1" id="cb-card-date"></p>
+                                </div>
+                                <div class="space-y-3 mb-5 text-xs text-stone-600 leading-relaxed">
+                                    <p class="whitespace-pre-line"><strong>🪨 Old Belief:</strong> <span id="cb-card-old" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>🌱 New Belief:</strong> <span id="cb-card-new" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>✅ Evidence for the New Belief:</strong> <span id="cb-card-new-evidence" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>🔄 Old-Belief Evidence, Reframed:</strong> <span id="cb-card-old-evidence" class="text-stone-800 font-medium"></span></p>
+                                </div>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl border border-[#e4dcd0]/50 mb-4">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">Progress</p>
+                                    <p class="text-stone-700 italic text-sm leading-relaxed whitespace-pre-line" id="cb-card-progress"></p>
+                                </div>
+                                <p class="text-[9px] text-center text-stone-400 font-medium tracking-widest uppercase">✦ THOUGHT JOURNAL CBT SKILLS</p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="shareCoreBeliefCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
+                                    🖼️ Save Card
+                                </button>
+                                <button onclick="clearCoreBeliefLog()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Start New Log
+                                </button>
+                                <button onclick="finishCoreBelief()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Save & Finish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center border-t border-stone-100 pt-6">
+                        <div class="text-[10px] font-bold text-stone-400 tracking-widest uppercase" id="cb-progress-text">Step 0 of 3</div>
+                        <div class="w-32 h-1 bg-stone-100 rounded-full overflow-hidden">
+                            <div id="cb-progress-bar" class="h-full bg-[#8c7e6e] w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="coping-cards" class="view-section hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-normal text-stone-900 mb-4">Coping Cards</h2>
+                    <p class="text-stone-600 text-base">
+                        Short, personal reminders you can carry with you and read whenever a hard thought or situation shows up.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-[#e4dcd0] p-8 md:p-14 relative overflow-hidden">
+
+                    <div id="cc-step-0" class="cc-step text-center space-y-8">
+                        <div class="w-28 h-28 bg-[#faf6f0] border border-[#e4dcd0]/70 rounded-full mx-auto flex items-center justify-center breathe-animation">
+                            <span class="text-3xl">🃏</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-normal text-stone-900 mb-3">Make a Coping Card</h3>
+                            <p class="text-stone-500 text-sm leading-relaxed">Write these in your own words — ideally together with your clinician. Save them to your deck or phone and read them daily, and whenever the situation comes up.</p>
+                        </div>
+                        <div id="cc-deck" class="hidden text-left border-t border-stone-100 pt-6 space-y-3">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">My Deck — read these daily</p>
+                            <div id="cc-deck-list" class="space-y-3"></div>
+                        </div>
+                        <button onclick="cbtGoTo('cc', 1)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-stone-800 transition-colors shadow-sm">Make a New Card</button>
+                    </div>
+
+                    <div id="cc-step-1" class="cc-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">1</span>
+                            <span>Card Type</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🃏 What kind of card?</h3>
+                        <p class="text-sm text-stone-500">Pick the type of coping card you want to write.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                            <button onclick="chooseCopingCardType('answer')" class="text-left bg-[#faf6f0]/60 border border-[#e4dcd0] rounded-2xl p-5 hover:border-stone-900 hover:bg-[#faf6f0] transition-colors">
+                                <div class="text-2xl mb-3">💬</div>
+                                <p class="font-semibold text-stone-800 text-sm mb-1">Answer a thought</p>
+                                <p class="text-xs text-stone-500 leading-relaxed">A reply to a thought that keeps coming back.</p>
+                            </button>
+                            <button onclick="chooseCopingCardType('plan')" class="text-left bg-[#faf6f0]/60 border border-[#e4dcd0] rounded-2xl p-5 hover:border-stone-900 hover:bg-[#faf6f0] transition-colors">
+                                <div class="text-2xl mb-3">🗺️</div>
+                                <p class="font-semibold text-stone-800 text-sm mb-1">Plan for a situation</p>
+                                <p class="text-xs text-stone-500 leading-relaxed">Steps to take when a hard situation comes up.</p>
+                            </button>
+                            <button onclick="chooseCopingCardType('going')" class="text-left bg-[#faf6f0]/60 border border-[#e4dcd0] rounded-2xl p-5 hover:border-stone-900 hover:bg-[#faf6f0] transition-colors">
+                                <div class="text-2xl mb-3">🚀</div>
+                                <p class="font-semibold text-stone-800 text-sm mb-1">Get myself going</p>
+                                <p class="text-xs text-stone-500 leading-relaxed">A nudge for when you don't feel like doing something.</p>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('cc', 0)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                        </div>
+                    </div>
+
+                    <div id="cc-step-2" class="cc-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">2</span>
+                            <span>Write the Card</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">✍️ <span id="cc-type-title">Write your card</span></h3>
+                        <p class="text-sm text-stone-500">Fill in the front and back of the card in your own words.</p>
+                        <div id="cc-fields-answer" class="cc-fields hidden space-y-4 mt-6">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Front</p>
+                            <input type="text" id="cc-answer-front" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="When I think: e.g., “Nobody wants me around.”">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest pt-2">Back</p>
+                            <textarea id="cc-answer-back" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="Remind myself: e.g., My sister called twice this week. One bad night doesn't mean nobody cares. Text her back."></textarea>
+                        </div>
+                        <div id="cc-fields-plan" class="cc-fields hidden space-y-4 mt-6">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Front</p>
+                            <input type="text" id="cc-plan-front" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="When this happens: e.g., I start to panic at the grocery store">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest pt-2">Back — I will:</p>
+                            <input type="text" id="cc-plan-1" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="1. e.g., Take three slow breaths">
+                            <input type="text" id="cc-plan-2" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="2. e.g., Name 5 things I can see">
+                            <input type="text" id="cc-plan-3" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="3. e.g., Finish the one aisle I'm in, then decide">
+                        </div>
+                        <div id="cc-fields-going" class="cc-fields hidden space-y-4 mt-6">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Front</p>
+                            <input type="text" id="cc-going-front" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="When I don't feel like doing: e.g., the dishes">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest pt-2">Back</p>
+                            <textarea id="cc-going-remember" class="w-full h-24 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="Remember: e.g., I always feel better once the kitchen is clean."></textarea>
+                            <input type="text" id="cc-going-step" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="First small step: e.g., Wash just the cups">
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button onclick="cbtGoTo('cc', 1)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="generateCopingCard()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors shadow-sm flex-1">Generate Coping Card</button>
+                        </div>
+                        <div id="cc-card-preview-container" class="hidden mt-10 border border-[#e4dcd0] rounded-3xl p-6 bg-[#faf6f0]/40 space-y-4">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Preview of Your Entry</p>
+
+                            <div id="coping-card" class="bg-white border border-[#e4dcd0] rounded-2xl p-6 relative overflow-hidden text-left shadow-sm">
+                                <div class="absolute top-[16px] right-[16px] opacity-15">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#234736"/>
+                                        <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
+                                    </svg>
+                                </div>
+                                <div class="border-b border-[#e4dcd0]/60 pb-3 mb-4">
+                                    <h4 class="text-xl font-normal text-stone-900 serif-font pr-12">Coping Card</h4>
+                                    <p class="text-[10px] text-stone-400 uppercase tracking-wider font-semibold mt-1" id="cc-card-date"></p>
+                                </div>
+                                <div class="space-y-3 mb-5 text-xs text-stone-600 leading-relaxed">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest" id="cc-card-type"></p>
+                                    <div class="border border-dashed border-[#e4dcd0] rounded-xl p-4">
+                                        <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">Front</p>
+                                        <p class="text-stone-800 font-medium text-sm whitespace-pre-line" id="cc-card-front"></p>
+                                    </div>
+                                </div>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl border border-[#e4dcd0]/50 mb-4">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">Back</p>
+                                    <p class="text-stone-700 italic text-sm leading-relaxed whitespace-pre-line" id="cc-card-back"></p>
+                                </div>
+                                <p class="text-[9px] text-center text-stone-400 font-medium tracking-widest uppercase">✦ THOUGHT JOURNAL CBT SKILLS</p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="shareCopingCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
+                                    🖼️ Save Card
+                                </button>
+                                <button id="cc-add-deck-btn" onclick="addCopingCardToDeck()" class="bg-[#8c7e6e] text-white px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-700 transition-colors flex-1">
+                                    + Add to My Deck
+                                </button>
+                                <button onclick="finishCopingCard()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Finish & Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center border-t border-stone-100 pt-6">
+                        <div class="text-[10px] font-bold text-stone-400 tracking-widest uppercase" id="cc-progress-text">Step 0 of 2</div>
+                        <div class="w-32 h-1 bg-stone-100 rounded-full overflow-hidden">
+                            <div id="cc-progress-bar" class="h-full bg-[#8c7e6e] w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-stone-900 text-stone-400 py-12 text-center mt-auto border-t border-stone-800">
@@ -837,6 +1620,9 @@
         const practiceMenuBtn = document.getElementById('practice-menu-btn');
         const practiceDropdown = document.getElementById('practice-dropdown');
         const practiceTargets = ['practice', 'sensory', 'breathing'];
+        const cbtMenuBtn = document.getElementById('cbt-menu-btn');
+        const cbtDropdown = document.getElementById('cbt-dropdown');
+        const cbtTargets = ['thought-record', 'test-thoughts', 'core-belief', 'coping-cards'];
 
         function navigateTo(targetId) {
             if (targetId !== 'breathing' && isBreathing) {
@@ -875,7 +1661,14 @@
                 practiceMenuBtn.classList.remove('active', 'border-stone-900');
             }
 
+            if (cbtTargets.includes(targetId)) {
+                cbtMenuBtn.classList.add('active', 'border-stone-900');
+            } else {
+                cbtMenuBtn.classList.remove('active', 'border-stone-900');
+            }
+
             practiceDropdown.classList.add('hidden');
+            cbtDropdown.classList.add('hidden');
             mobileMenu.classList.add('hidden');
         }
 
@@ -888,14 +1681,26 @@
 
         practiceMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
+            cbtDropdown.classList.add('hidden');
             practiceDropdown.classList.toggle('hidden');
+        });
+
+        cbtMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            practiceDropdown.classList.add('hidden');
+            cbtDropdown.classList.toggle('hidden');
         });
 
         document.addEventListener('click', () => {
             practiceDropdown.classList.add('hidden');
+            cbtDropdown.classList.add('hidden');
         });
 
         practiceDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        cbtDropdown.addEventListener('click', (e) => {
             e.stopPropagation();
         });
 
@@ -1257,6 +2062,407 @@
             document.getElementById('b-card-preview-container').classList.add('hidden');
             navigateTo('overview');
         }
+
+        // --- CBT Skills Worksheets ---
+        const cbtStepTotals = { tr: 5, tt: 10, cb: 3, cc: 2 };
+
+        function cbtGoTo(prefix, stepNumber) {
+            document.querySelectorAll(`.${prefix}-step`).forEach(el => el.classList.add('hidden'));
+
+            const targetStep = document.getElementById(`${prefix}-step-${stepNumber}`);
+            if (targetStep) {
+                targetStep.classList.remove('hidden');
+                targetStep.classList.add('animate-fade-in');
+            }
+
+            const total = cbtStepTotals[prefix];
+            document.getElementById(`${prefix}-progress-bar`).style.width = `${(stepNumber / total) * 100}%`;
+            document.getElementById(`${prefix}-progress-text`).innerText = `Step ${stepNumber} of ${total}`;
+
+            if (stepNumber === 0 && prefix === 'cb') renderCoreBeliefIntro();
+            if (stepNumber === 0 && prefix === 'cc') renderCopingDeck();
+        }
+
+        function cbtValue(id, fallback = '[Not specified]') {
+            return document.getElementById(id).value.trim() || fallback;
+        }
+
+        function cbtRange(id) {
+            return Number(document.getElementById(id).value);
+        }
+
+        function setCbtRange(id, value) {
+            const range = document.getElementById(id);
+            range.value = value;
+            document.getElementById(`${id}-val`).innerText = `${value}${range.dataset.unit}`;
+        }
+
+        document.querySelectorAll('.cbt-range').forEach(range => {
+            range.addEventListener('input', () => setCbtRange(range.id, range.value));
+        });
+
+        function cbtTimestamp() {
+            const now = new Date();
+            return now.toLocaleDateString() + ' @ ' + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+        function showCbtPreview(prefix) {
+            document.getElementById(`${prefix}-card-date`).innerText = cbtTimestamp();
+            const previewContainer = document.getElementById(`${prefix}-card-preview-container`);
+            previewContainer.classList.remove('hidden');
+            previewContainer.classList.add('animate-fade-in');
+
+            setTimeout(() => {
+                previewContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+
+        function resetCbtWorksheet(sectionId, prefix) {
+            document.querySelectorAll(`#${sectionId} input[type="text"], #${sectionId} textarea`).forEach(field => field.value = '');
+            document.querySelectorAll(`#${sectionId} .cbt-range`).forEach(range => setCbtRange(range.id, 50));
+            document.getElementById(`${prefix}-card-preview-container`).classList.add('hidden');
+            cbtGoTo(prefix, 0);
+        }
+
+        // Thought Record
+        function generateThoughtRecordCard() {
+            const situation = [cbtValue('tr-when', ''), cbtValue('tr-situation', '')].filter(Boolean).join(' — ') || '[Not specified]';
+            const beliefBefore = cbtRange('tr-thought-belief');
+            const strengthBefore = cbtRange('tr-feeling-strength');
+
+            document.getElementById('tr-card-situation').innerText = situation;
+            document.getElementById('tr-card-thought').innerText = `${cbtValue('tr-thought')} (believed ${beliefBefore}%)`;
+            document.getElementById('tr-card-feeling').innerText = `${cbtValue('tr-feeling')} (strength ${strengthBefore}/100)`;
+            document.getElementById('tr-card-balanced').innerText = `${cbtValue('tr-balanced')} (believed ${cbtRange('tr-balanced-belief')}%)`;
+            document.getElementById('tr-card-after').innerText = `First thought believed ${cbtRange('tr-after-belief')}% (was ${beliefBefore}%) · Feeling ${cbtRange('tr-after-strength')}/100 (was ${strengthBefore})`;
+            document.getElementById('tr-card-action').innerText = cbtValue('tr-action', 'Completed a Thought Record to look at an upsetting thought from every side.');
+
+            showCbtPreview('tr');
+        }
+
+        async function shareThoughtRecordCard() {
+            await exportCardAsPng('thought-record-card', 'thought-record-entry.png', 'My Thought Record Entry');
+        }
+
+        function finishThoughtRecord() {
+            resetCbtWorksheet('thought-record', 'tr');
+            navigateTo('overview');
+        }
+
+        // Testing Your Thoughts
+        function generateTestThoughtsCard() {
+            const beliefBefore = cbtRange('tt-thought-belief');
+            const strengthBefore = cbtRange('tt-feeling-strength');
+
+            document.getElementById('tt-card-situation').innerText = cbtValue('tt-situation');
+            document.getElementById('tt-card-thought').innerText = `${cbtValue('tt-thought')} (believed ${beliefBefore}%)`;
+            document.getElementById('tt-card-feeling').innerText = `${cbtValue('tt-feeling')} (strength ${strengthBefore}/100)`;
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`tt-card-test-${i}`).innerText = cbtValue(`tt-test-${i}`);
+            }
+            document.getElementById('tt-card-after').innerText = `I believe the first thought ${cbtRange('tt-after-belief')}% now (was ${beliefBefore}%).\nThe feeling is ${cbtRange('tt-after-strength')}/100 now (was ${strengthBefore}).`;
+
+            showCbtPreview('tt');
+        }
+
+        async function shareTestThoughtsCard() {
+            await exportCardAsPng('test-thoughts-card', 'testing-my-thoughts-entry.png', 'My Testing Your Thoughts Entry');
+        }
+
+        function finishTestThoughts() {
+            resetCbtWorksheet('test-thoughts', 'tt');
+            navigateTo('overview');
+        }
+
+        // Core Belief Worksheet (ongoing log, saved on this device)
+        const CORE_BELIEF_KEY = 'cbt-core-belief-log';
+        let coreBeliefLog = { startDate: null, entries: [] };
+
+        function loadCoreBeliefLog() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(CORE_BELIEF_KEY));
+                if (saved) coreBeliefLog = saved;
+            } catch (e) { /* storage unavailable: keep an in-memory log */ }
+
+            document.getElementById('cb-old').value = coreBeliefLog.oldBelief || '';
+            document.getElementById('cb-new').value = coreBeliefLog.newBelief || '';
+            ['cb-old-now', 'cb-old-most', 'cb-old-least', 'cb-new-now'].forEach(id => {
+                setCbtRange(id, coreBeliefLog[id] ?? 50);
+            });
+            renderCoreBeliefEntries();
+        }
+
+        function saveCoreBeliefLog() {
+            coreBeliefLog.oldBelief = document.getElementById('cb-old').value.trim();
+            coreBeliefLog.newBelief = document.getElementById('cb-new').value.trim();
+            ['cb-old-now', 'cb-old-most', 'cb-old-least', 'cb-new-now'].forEach(id => {
+                coreBeliefLog[id] = cbtRange(id);
+            });
+            if (!coreBeliefLog.startDate) coreBeliefLog.startDate = new Date().toLocaleDateString();
+            try {
+                localStorage.setItem(CORE_BELIEF_KEY, JSON.stringify(coreBeliefLog));
+            } catch (e) { /* storage unavailable */ }
+        }
+
+        ['cb-old', 'cb-new', 'cb-old-now', 'cb-old-most', 'cb-old-least', 'cb-new-now'].forEach(id => {
+            document.getElementById(id).addEventListener('change', saveCoreBeliefLog);
+        });
+
+        function addCoreBeliefEvidence(kind) {
+            const textId = kind === 'new' ? 'cb-new-evidence' : 'cb-old-evidence';
+            const text = document.getElementById(textId).value.trim();
+            if (!text) return;
+
+            const entry = { kind, text, date: new Date().toLocaleDateString() };
+            if (kind === 'old') {
+                entry.reframe = document.getElementById('cb-old-reframe').value.trim();
+                document.getElementById('cb-old-reframe').value = '';
+            }
+            document.getElementById(textId).value = '';
+
+            coreBeliefLog.entries.push(entry);
+            saveCoreBeliefLog();
+            renderCoreBeliefEntries();
+        }
+
+        function removeCoreBeliefEvidence(index) {
+            coreBeliefLog.entries.splice(index, 1);
+            saveCoreBeliefLog();
+            renderCoreBeliefEntries();
+        }
+
+        function renderCoreBeliefEntries() {
+            const lists = { new: document.getElementById('cb-new-list'), old: document.getElementById('cb-old-list') };
+            lists.new.innerHTML = '';
+            lists.old.innerHTML = '';
+
+            coreBeliefLog.entries.forEach((entry, index) => {
+                const item = document.createElement('li');
+                item.className = 'bg-white border border-[#e4dcd0]/70 rounded-xl p-3 flex gap-3 items-start';
+
+                const body = document.createElement('div');
+                body.className = 'flex-1';
+                const text = document.createElement('p');
+                text.textContent = entry.text;
+                body.appendChild(text);
+                if (entry.reframe) {
+                    const reframe = document.createElement('p');
+                    reframe.className = 'text-xs text-[#8c7e6e] italic mt-1';
+                    reframe.textContent = `↳ ${entry.reframe}`;
+                    body.appendChild(reframe);
+                }
+                const date = document.createElement('p');
+                date.className = 'text-[10px] text-stone-400 uppercase tracking-wider mt-1';
+                date.textContent = entry.date;
+                body.appendChild(date);
+
+                const remove = document.createElement('button');
+                remove.className = 'text-stone-300 hover:text-stone-700 text-sm';
+                remove.setAttribute('aria-label', 'Remove entry');
+                remove.textContent = '✕';
+                remove.addEventListener('click', () => removeCoreBeliefEvidence(index));
+
+                item.append(body, remove);
+                lists[entry.kind].prepend(item);
+            });
+        }
+
+        function renderCoreBeliefIntro() {
+            const hasLog = coreBeliefLog.oldBelief || coreBeliefLog.entries.length > 0;
+            document.getElementById('cb-resume-note').classList.toggle('hidden', !hasLog);
+        }
+
+        function formatEvidence(entries, withReframe) {
+            if (entries.length === 0) return '[None yet]';
+            return entries.slice(-5).map(entry => {
+                return '\n• ' + entry.text + (withReframe && entry.reframe ? ` → ${entry.reframe}` : '');
+            }).join('');
+        }
+
+        function generateCoreBeliefCard() {
+            saveCoreBeliefLog();
+            const newEntries = coreBeliefLog.entries.filter(entry => entry.kind === 'new');
+            const oldEntries = coreBeliefLog.entries.filter(entry => entry.kind === 'old');
+
+            document.getElementById('cb-card-old').innerText = `${cbtValue('cb-old')} (now ${cbtRange('cb-old-now')}% · most ${cbtRange('cb-old-most')}% · least ${cbtRange('cb-old-least')}%)`;
+            document.getElementById('cb-card-new').innerText = `${cbtValue('cb-new')} (now ${cbtRange('cb-new-now')}%)`;
+            document.getElementById('cb-card-new-evidence').innerText = formatEvidence(newEntries, false);
+            document.getElementById('cb-card-old-evidence').innerText = formatEvidence(oldEntries, true);
+            document.getElementById('cb-card-progress').innerText = `Log started ${coreBeliefLog.startDate}. Collected ${newEntries.length} piece${newEntries.length === 1 ? '' : 's'} of evidence for the new belief and reframed ${oldEntries.length} old-belief moment${oldEntries.length === 1 ? '' : 's'}.`;
+
+            showCbtPreview('cb');
+        }
+
+        async function shareCoreBeliefCard() {
+            await exportCardAsPng('core-belief-card', 'core-belief-log.png', 'My Core Belief Log');
+        }
+
+        function finishCoreBelief() {
+            saveCoreBeliefLog();
+            document.getElementById('cb-card-preview-container').classList.add('hidden');
+            cbtGoTo('cb', 0);
+            navigateTo('overview');
+        }
+
+        function clearCoreBeliefLog() {
+            if (!confirm('Start a new log? This permanently clears your current belief log on this device.')) return;
+            try {
+                localStorage.removeItem(CORE_BELIEF_KEY);
+            } catch (e) { /* storage unavailable */ }
+            coreBeliefLog = { startDate: null, entries: [] };
+            resetCbtWorksheet('core-belief', 'cb');
+            renderCoreBeliefEntries();
+        }
+
+        // Coping Cards (deck saved on this device)
+        const COPING_DECK_KEY = 'cbt-coping-deck';
+        const copingCardTypes = {
+            answer: { label: 'Answer a Thought', fields: ['cc-answer-front', 'cc-answer-back'] },
+            plan: { label: 'Plan for a Situation', fields: ['cc-plan-front', 'cc-plan-1', 'cc-plan-2', 'cc-plan-3'] },
+            going: { label: 'Get Myself Going', fields: ['cc-going-front', 'cc-going-remember', 'cc-going-step'] }
+        };
+        let copingCardType = 'answer';
+        let currentCopingCard = null;
+
+        function loadCopingDeck() {
+            try {
+                return JSON.parse(localStorage.getItem(COPING_DECK_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCopingDeck(deck) {
+            try {
+                localStorage.setItem(COPING_DECK_KEY, JSON.stringify(deck));
+            } catch (e) { /* storage unavailable */ }
+        }
+
+        function chooseCopingCardType(type) {
+            copingCardType = type;
+            document.querySelectorAll('.cc-fields').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`cc-fields-${type}`).classList.remove('hidden');
+            document.getElementById('cc-type-title').innerText = copingCardTypes[type].label;
+            document.getElementById('cc-card-preview-container').classList.add('hidden');
+            cbtGoTo('cc', 2);
+        }
+
+        function composeCopingCard(type, values) {
+            const v = (id) => values[id] || '______';
+            if (type === 'answer') {
+                return { front: `When I think: ${v('cc-answer-front')}`, back: `Remind myself: ${v('cc-answer-back')}` };
+            }
+            if (type === 'plan') {
+                const steps = ['cc-plan-1', 'cc-plan-2', 'cc-plan-3'].map(id => values[id]).filter(Boolean);
+                const list = steps.length ? steps.map((step, i) => `${i + 1}. ${step}`).join('\n') : '______';
+                return { front: `When this happens: ${v('cc-plan-front')}`, back: `I will:\n${list}` };
+            }
+            return { front: `When I don't feel like doing ${v('cc-going-front')}`, back: `Remember: ${v('cc-going-remember')}\nFirst small step: ${v('cc-going-step')}` };
+        }
+
+        function generateCopingCard() {
+            const values = {};
+            copingCardTypes[copingCardType].fields.forEach(id => {
+                values[id] = document.getElementById(id).value.trim();
+            });
+            const { front, back } = composeCopingCard(copingCardType, values);
+            currentCopingCard = { type: copingCardType, values, date: new Date().toLocaleDateString() };
+
+            document.getElementById('cc-card-type').innerText = copingCardTypes[copingCardType].label;
+            document.getElementById('cc-card-front').innerText = front;
+            document.getElementById('cc-card-back').innerText = back;
+            setCopingDeckButton(false);
+
+            showCbtPreview('cc');
+        }
+
+        function setCopingDeckButton(added) {
+            const btn = document.getElementById('cc-add-deck-btn');
+            btn.disabled = added;
+            btn.innerText = added ? '✓ In My Deck' : '+ Add to My Deck';
+            btn.classList.toggle('opacity-60', added);
+        }
+
+        function addCopingCardToDeck() {
+            if (!currentCopingCard) return;
+            const deck = loadCopingDeck();
+            deck.push(currentCopingCard);
+            saveCopingDeck(deck);
+            setCopingDeckButton(true);
+        }
+
+        function viewCopingCard(index) {
+            const card = loadCopingDeck()[index];
+            if (!card) return;
+            chooseCopingCardType(card.type);
+            copingCardTypes[card.type].fields.forEach(id => {
+                document.getElementById(id).value = card.values[id] || '';
+            });
+            generateCopingCard();
+            setCopingDeckButton(true);
+        }
+
+        function removeCopingCard(index) {
+            if (!confirm('Remove this card from your deck?')) return;
+            const deck = loadCopingDeck();
+            deck.splice(index, 1);
+            saveCopingDeck(deck);
+            renderCopingDeck();
+        }
+
+        function renderCopingDeck() {
+            const deck = loadCopingDeck();
+            const list = document.getElementById('cc-deck-list');
+            list.innerHTML = '';
+            document.getElementById('cc-deck').classList.toggle('hidden', deck.length === 0);
+
+            deck.forEach((card, index) => {
+                const { front, back } = composeCopingCard(card.type, card.values);
+                const item = document.createElement('div');
+                item.className = 'bg-[#faf6f0]/60 border border-[#e4dcd0] rounded-2xl p-4 flex gap-3 items-start';
+
+                const body = document.createElement('div');
+                body.className = 'flex-1 space-y-1';
+                const type = document.createElement('p');
+                type.className = 'text-[9px] font-bold text-stone-400 uppercase tracking-widest';
+                type.textContent = copingCardTypes[card.type].label;
+                const frontText = document.createElement('p');
+                frontText.className = 'text-sm font-medium text-stone-800';
+                frontText.textContent = front;
+                const backText = document.createElement('p');
+                backText.className = 'text-xs text-stone-600 italic whitespace-pre-line';
+                backText.textContent = back;
+                body.append(type, frontText, backText);
+
+                const actions = document.createElement('div');
+                actions.className = 'flex flex-col gap-2 text-[10px] uppercase tracking-wider font-medium';
+                const view = document.createElement('button');
+                view.className = 'text-stone-600 hover:text-stone-900';
+                view.textContent = 'Open';
+                view.addEventListener('click', () => viewCopingCard(index));
+                const remove = document.createElement('button');
+                remove.className = 'text-stone-400 hover:text-stone-700';
+                remove.textContent = 'Remove';
+                remove.addEventListener('click', () => removeCopingCard(index));
+                actions.append(view, remove);
+
+                item.append(body, actions);
+                list.appendChild(item);
+            });
+        }
+
+        async function shareCopingCard() {
+            await exportCardAsPng('coping-card', 'coping-card.png', 'My Coping Card');
+        }
+
+        function finishCopingCard() {
+            currentCopingCard = null;
+            resetCbtWorksheet('coping-cards', 'cc');
+            navigateTo('overview');
+        }
+
+        loadCoreBeliefLog();
+        renderCopingDeck();
 
         const style = document.createElement('style');
         style.textContent = `
