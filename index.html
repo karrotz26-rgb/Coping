@@ -481,7 +481,7 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-normal text-stone-900 mb-4">CBT Guide & the Cognitive Model</h2>
                     <p class="text-stone-600 text-base max-w-2xl mx-auto">
-                        Explore how thoughts and beliefs shape the way we feel and act. Toggle between the subsections below to explore the cognitive model, automatic thoughts, rules and assumptions, or core beliefs.
+                        Explore how thoughts and beliefs shape the way we feel and act. Toggle between the subsections below to explore the cognitive model, automatic thoughts, rules and assumptions, core beliefs, or documentation cues for session notes.
                     </p>
 
                     <div class="flex flex-wrap justify-center gap-3 mt-10">
@@ -496,6 +496,9 @@
                         </button>
                         <button onclick="switchGuideTab('cbt', 'core')" data-sub="core" class="cbt-sub-btn bg-white text-stone-600 hover:bg-[#faf6f0] border border-[#e4dcd0] px-6 py-3 rounded-full font-medium text-xs tracking-wider uppercase transition-all shadow-sm">
                             🌳 Core Beliefs
+                        </button>
+                        <button onclick="switchGuideTab('cbt', 'notes')" data-sub="notes" class="cbt-sub-btn bg-white text-stone-600 hover:bg-[#faf6f0] border border-[#e4dcd0] px-6 py-3 rounded-full font-medium text-xs tracking-wider uppercase transition-all shadow-sm">
+                            📝 Documentation Cues
                         </button>
                     </div>
                 </div>
@@ -883,6 +886,93 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div id="cbt-notes" class="cbt-sub-section hidden space-y-4">
+                    <div class="mb-6 bg-[#faf6f0] p-6 rounded-2xl border border-[#e4dcd0]/60 shadow-sm">
+                        <h3 class="text-lg font-normal text-stone-900">Documentation Cues (for Clinicians)</h3>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">When a session note describes CBT work, name the level of cognition and the intervention. Click each part of the note to see what to record.</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="0">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">📋</div>
+                                <span class="text-lg font-normal text-stone-900">Data</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed space-y-4">
+                                <p>Record:</p>
+                                <ul class="list-disc pl-5 space-y-1.5">
+                                    <li>The situation</li>
+                                    <li>The automatic thought, in the patient’s own words</li>
+                                    <li>The emotion and its intensity</li>
+                                    <li>Belief in the thought (%)</li>
+                                </ul>
+                                <p>Also record any rule, assumption, or core belief that was identified, and its category.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="1">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🔎</div>
+                                <span class="text-lg font-normal text-stone-900">Assessment</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed space-y-4">
+                                <p>Name the technique used, such as Socratic questioning, the downward arrow, a behavioral experiment, the continuum, or the Core Belief Worksheet. Then include:</p>
+                                <ul class="list-disc pl-5 space-y-1.5">
+                                    <li>The patient’s response</li>
+                                    <li>Belief and emotion rerated after the intervention</li>
+                                    <li>Any pattern across sessions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🗓️</div>
+                                <span class="text-lg font-normal text-stone-900">Plan</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed space-y-4">
+                                <p>Record the between-session assignment tied to that work, such as a Thought Record, a coping card, an experiment, or daily belief rerating. Then note which level of cognition to target next.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button onclick="navigateTo('thought-record')" class="bg-white border border-[#e4dcd0] text-stone-700 hover:bg-[#faf6f0] px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Thought Record →</button>
+                                    <button onclick="navigateTo('coping-cards')" class="bg-white border border-[#e4dcd0] text-stone-700 hover:bg-[#faf6f0] px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Coping Cards →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="3">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">⚖️</div>
+                                <span class="text-lg font-normal text-stone-900">Only What Was Reported</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed space-y-4">
+                                <p>Use only what the clinician actually reported. Don’t infer a core belief or label a distortion the clinician didn’t name.</p>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">📝</span>
+                                    <p class="text-xs text-stone-600"><strong>Hypotheses stay hypotheses:</strong> If the clinician presented a belief as a working hypothesis, write it as a “working hypothesis.”</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
