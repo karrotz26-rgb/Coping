@@ -77,6 +77,7 @@
                             <button data-target="practice" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Anchoring</button>
                             <button data-target="sensory" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Sensory Grounding</button>
                             <button data-target="breathing" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Bubble Breathing</button>
+                            <button data-target="safe-place" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Safe Place</button>
                         </div>
                     </div>
                     <button data-target="cbt-guide" class="nav-btn nav-link py-7 border-b-2 border-transparent hover:text-stone-900 transition-colors">CBT Guide</button>
@@ -112,6 +113,7 @@
                     <button data-target="practice" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Anchoring</button>
                     <button data-target="sensory" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Sensory Grounding</button>
                     <button data-target="breathing" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Bubble Breathing</button>
+                    <button data-target="safe-place" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Safe Place</button>
                 </div>
             </div>
             <button data-target="cbt-guide" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">CBT Guide</button>
@@ -185,6 +187,12 @@
                             <h3 class="font-normal text-xl text-stone-900 mb-2">Bubble Breathing</h3>
                             <p class="text-sm text-stone-500 leading-relaxed">Breathe along with a growing and shrinking bubble. Slow, steady breathing tells your body it is safe to relax.</p>
                             <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Breathe with me →</span>
+                        </button>
+                        <button data-home-target="safe-place" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🏞️</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Safe Place</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Picture a place where you feel calm and safe, fill it in with all your senses, and give it a cue word so you can return there whenever you need to.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Find your safe place →</span>
                         </button>
                     </div>
                 </div>
@@ -1337,6 +1345,231 @@
             </div>
         </section>
 
+        <section id="safe-place" class="view-section hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-normal text-stone-900 mb-4">Safe Place</h2>
+                    <p class="text-stone-600 text-base">
+                        This calming imagery exercise comes from EMDR therapy and is also used in schema therapy. You build a vivid picture of a place where you feel safe, so you can return to it in your mind whenever you need comfort.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-[#e4dcd0] p-8 md:p-14 relative overflow-hidden">
+
+                    <div id="sp-step-0" class="sp-step text-center space-y-8">
+                        <div class="w-28 h-28 bg-[#faf6f0] border border-[#e4dcd0]/70 rounded-full mx-auto flex items-center justify-center breathe-animation">
+                            <span class="text-3xl">🏞️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-normal text-stone-900 mb-3">Build Your Safe Place</h3>
+                            <p class="text-stone-500 text-sm leading-relaxed">Find a quiet spot where you won't be interrupted. You'll picture a place where you feel calm and safe, fill it in with all your senses, and give it a cue word you can use to return there whenever you need to.</p>
+                        </div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30 text-left">
+                            <span class="text-base">🛡️</span>
+                            <p class="text-xs text-stone-600 leading-relaxed"><strong>Go gently:</strong> If upsetting memories, images, or feelings show up at any point, open your eyes, take a slow breath, and stop. You can try again with a different place — an imaginary one often works best. This exercise is best learned with your therapist first.</p>
+                        </div>
+                        <button onclick="cbtGoTo('sp', 1)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-stone-800 transition-colors shadow-sm">Begin Safe Place</button>
+                    </div>
+
+                    <div id="sp-step-1" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">1</span>
+                            <span>Choose Your Place</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🏞️ Where is your safe place?</h3>
+                        <p class="text-sm text-stone-500">Bring to mind a place, real or imagined, where you feel calm and safe. It could be a beach, a forest, a cozy room, or somewhere you make up.</p>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                            <span class="text-base">💡</span>
+                            <p class="text-xs text-stone-600 leading-relaxed"><strong>Choosing a place:</strong> Pick somewhere with no ties to hard memories, and leave other people out of it for now — even people you love can bring up mixed feelings.</p>
+                        </div>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="sp-place" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="e.g., A quiet beach at sunset">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>Before we begin: how calm do I feel?</span>
+                                    <span id="sp-calm-before-val" class="font-semibold text-stone-800">5/10</span>
+                                </div>
+                                <input type="range" id="sp-calm-before" min="0" max="10" step="1" value="5" data-unit="/10" class="cbt-range w-full">
+                                <div class="flex justify-between text-[10px] text-stone-400 mt-1">
+                                    <span>0 · Not calm at all</span>
+                                    <span>10 · Completely calm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('sp', 0)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('sp', 2)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-step-2" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">2</span>
+                            <span>Sight</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">👀 What do you see?</h3>
+                        <p class="text-sm text-stone-500">Close your eyes for a moment and look around your place. Notice the colors, the light, the shapes, and what is near and far.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="sp-see" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., Soft orange sky, gentle waves, smooth sand stretching out in both directions"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('sp', 1)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('sp', 3)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-step-3" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">3</span>
+                            <span>Sound & Smell</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">👂 What do you hear and smell?</h3>
+                        <p class="text-sm text-stone-500">Listen to the sounds of your place. Then breathe in and notice any scents in the air.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="sp-hear" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="I hear… e.g., Waves rolling in, a few seagulls far away">
+                            <input type="text" id="sp-smell" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="I smell… e.g., Salty air, sunscreen">
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('sp', 2)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('sp', 4)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-step-4" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">4</span>
+                            <span>Touch</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">✋ What do you feel on your skin?</h3>
+                        <p class="text-sm text-stone-500">Notice the temperature, the air, and what you are touching or resting on.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="sp-touch" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., Warm sand under my feet, a light breeze on my face"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('sp', 3)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('sp', 5)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-step-5" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">5</span>
+                            <span>Feelings & Body</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">💗 How do you feel here?</h3>
+                        <p class="text-sm text-stone-500">Stay in your place for a moment. What feelings come up? Where do you notice those pleasant feelings in your body?</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="sp-feelings" class="w-full h-24 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., Peaceful, relaxed, safe"></textarea>
+                            <input type="text" id="sp-body" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="Where in my body? e.g., My shoulders drop, my chest feels open">
+                        </div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                            <span class="text-base">🦋</span>
+                            <p class="text-xs text-stone-600 leading-relaxed"><strong>Optional — Butterfly Hug:</strong> Cross your arms over your chest so each hand rests near the opposite shoulder. While you hold the image and the good feelings, slowly tap left, right, left, right, about 4 to 6 times, then pause and breathe. If anything unpleasant shows up, stop tapping.</p>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('sp', 4)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('sp', 6)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-step-6" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">6</span>
+                            <span>Cue Word</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🔑 Give your place a name</h3>
+                        <p class="text-sm text-stone-500">Choose a word or short phrase that brings the place and its calm back to you. Say it to yourself while you picture the place and notice the good feelings.</p>
+                        <div class="space-y-4 mt-6">
+                            <input type="text" id="sp-cue" class="w-full text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="e.g., “Sunset” or “Beach”">
+                        </div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                            <span class="text-base">🔁</span>
+                            <p class="text-xs text-stone-600 leading-relaxed"><strong>Practice:</strong> Bring up your safe place with your cue word once a day when you are already fairly calm. The more you practice, the easier it is to reach when you are upset.</p>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('sp', 5)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('sp', 7)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="sp-step-7" class="sp-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">✓</span>
+                            <span>Reflect & Share</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">How do you feel now?</h3>
+                        <p class="text-sm text-stone-500">Notice how you feel after spending time in your safe place, then briefly record your experience to assemble your journal card.</p>
+                        <div class="space-y-4 mt-6">
+                            <div class="bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4">
+                                <div class="flex justify-between items-center text-xs text-stone-500 mb-2">
+                                    <span>Now: how calm do I feel?</span>
+                                    <span id="sp-calm-after-val" class="font-semibold text-stone-800">5/10</span>
+                                </div>
+                                <input type="range" id="sp-calm-after" min="0" max="10" step="1" value="5" data-unit="/10" class="cbt-range w-full">
+                                <div class="flex justify-between text-[10px] text-stone-400 mt-1">
+                                    <span>0 · Not calm at all</span>
+                                    <span>10 · Completely calm</span>
+                                </div>
+                            </div>
+                            <textarea id="sp-reflection" class="w-full h-32 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="I feel more settled. Picturing the waves helped my breathing slow down…"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button onclick="cbtGoTo('sp', 6)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="generateSafePlaceCard()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors shadow-sm flex-1">Generate Journal Card</button>
+                        </div>
+
+                        <div id="sp-card-preview-container" class="hidden mt-10 border border-[#e4dcd0] rounded-3xl p-6 bg-[#faf6f0]/40 space-y-4">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Preview of Your Entry</p>
+
+                            <div id="safe-place-card" class="bg-white border border-[#e4dcd0] rounded-2xl p-6 relative overflow-hidden text-left shadow-sm">
+                                <div class="absolute top-[16px] right-[16px] opacity-15">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#234736"/>
+                                        <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
+                                    </svg>
+                                </div>
+                                <div class="border-b border-[#e4dcd0]/60 pb-3 mb-4">
+                                    <h4 class="text-xl font-normal text-stone-900 serif-font pr-12">Safe Place Entry</h4>
+                                    <p class="text-[10px] text-stone-400 uppercase tracking-wider font-semibold mt-1" id="sp-card-date"></p>
+                                </div>
+                                <div class="space-y-3 mb-5 text-xs text-stone-600 leading-relaxed">
+                                    <p class="whitespace-pre-line"><strong>🏞️ My Safe Place:</strong> <span id="sp-card-place" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>👀 I See:</strong> <span id="sp-card-see" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>👂 I Hear:</strong> <span id="sp-card-hear" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>👃 I Smell:</strong> <span id="sp-card-smell" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>✋ I Feel on My Skin:</strong> <span id="sp-card-touch" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>💗 Feelings & Body:</strong> <span id="sp-card-feelings" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>🔑 Cue Word:</strong> <span id="sp-card-cue" class="text-stone-800 font-medium"></span></p>
+                                    <p class="whitespace-pre-line"><strong>📈 Calm:</strong> <span id="sp-card-calm" class="text-stone-800 font-medium"></span></p>
+                                </div>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl border border-[#e4dcd0]/50 mb-4">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">Safe Place Reflection</p>
+                                    <p class="text-stone-700 italic text-sm leading-relaxed whitespace-pre-line" id="sp-card-reflection"></p>
+                                </div>
+                                <p class="text-[9px] text-center text-stone-400 font-medium tracking-widest uppercase">✦ THOUGHT JOURNAL GROUNDING SYSTEM</p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="shareSafePlaceCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
+                                    🖼️ Save Card
+                                </button>
+                                <button onclick="finishSafePlace()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Finish & Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center border-t border-stone-100 pt-6">
+                        <div class="text-[10px] font-bold text-stone-400 tracking-widest uppercase" id="sp-progress-text">Step 0 of 7</div>
+                        <div class="w-32 h-1 bg-stone-100 rounded-full overflow-hidden">
+                            <div id="sp-progress-bar" class="h-full bg-[#8c7e6e] w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="thought-record" class="view-section hidden">
             <div class="max-w-3xl mx-auto">
                 <div class="text-center mb-12">
@@ -2107,7 +2340,7 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const practiceMenuBtn = document.getElementById('practice-menu-btn');
         const practiceDropdown = document.getElementById('practice-dropdown');
-        const practiceTargets = ['practice', 'sensory', 'breathing'];
+        const practiceTargets = ['practice', 'sensory', 'breathing', 'safe-place'];
         const cbtMenuBtn = document.getElementById('cbt-menu-btn');
         const cbtDropdown = document.getElementById('cbt-dropdown');
         const cbtTargets = ['thought-record', 'test-thoughts', 'core-belief', 'coping-cards'];
@@ -2563,7 +2796,7 @@
         }
 
         // --- CBT Skills Worksheets ---
-        const cbtStepTotals = { tr: 5, tt: 10, cb: 3, cc: 2 };
+        const cbtStepTotals = { tr: 5, tt: 10, cb: 3, cc: 2, sp: 7 };
 
         function cbtGoTo(prefix, stepNumber) {
             document.querySelectorAll(`.${prefix}-step`).forEach(el => el.classList.add('hidden'));
@@ -2618,9 +2851,33 @@
 
         function resetCbtWorksheet(sectionId, prefix) {
             document.querySelectorAll(`#${sectionId} input[type="text"], #${sectionId} textarea`).forEach(field => field.value = '');
-            document.querySelectorAll(`#${sectionId} .cbt-range`).forEach(range => setCbtRange(range.id, 50));
+            document.querySelectorAll(`#${sectionId} .cbt-range`).forEach(range => setCbtRange(range.id, range.defaultValue));
             document.getElementById(`${prefix}-card-preview-container`).classList.add('hidden');
             cbtGoTo(prefix, 0);
+        }
+
+        // Safe Place (EMDR / schema therapy imagery)
+        function generateSafePlaceCard() {
+            document.getElementById('sp-card-place').innerText = cbtValue('sp-place');
+            document.getElementById('sp-card-see').innerText = cbtValue('sp-see');
+            document.getElementById('sp-card-hear').innerText = cbtValue('sp-hear');
+            document.getElementById('sp-card-smell').innerText = cbtValue('sp-smell');
+            document.getElementById('sp-card-touch').innerText = cbtValue('sp-touch');
+            document.getElementById('sp-card-feelings').innerText = [cbtValue('sp-feelings', ''), cbtValue('sp-body', '')].filter(Boolean).join(' — ') || '[Not specified]';
+            document.getElementById('sp-card-cue').innerText = cbtValue('sp-cue');
+            document.getElementById('sp-card-calm').innerText = `${cbtRange('sp-calm-after')}/10 now (was ${cbtRange('sp-calm-before')}/10 before)`;
+            document.getElementById('sp-card-reflection').innerText = cbtValue('sp-reflection', 'Built and visited my safe place using all my senses.');
+
+            showCbtPreview('sp');
+        }
+
+        async function shareSafePlaceCard() {
+            await exportCardAsPng('safe-place-card', 'safe-place-entry.png', 'My Safe Place Entry');
+        }
+
+        function finishSafePlace() {
+            resetCbtWorksheet('safe-place', 'sp');
+            navigateTo('overview');
         }
 
         // Thought Record
