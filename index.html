@@ -253,7 +253,7 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-normal text-stone-900 mb-4">Grounding Guide & Physiology</h2>
                     <p class="text-stone-600 text-base max-w-2xl mx-auto">
-                        Explore the mental and physical pillars of grounding. Toggle between the subsections below to explore questions, somatic senses, or co-regulation breathing.
+                        Explore the mental and physical pillars of grounding. Toggle between the subsections below to explore questions, somatic senses, co-regulation breathing, or safe place imagery.
                     </p>
                     
                     <div class="flex flex-wrap justify-center gap-3 mt-10">
@@ -265,6 +265,9 @@
                         </button>
                         <button onclick="switchEducationTab('benefits')" data-sub="benefits" class="edu-sub-btn bg-white text-stone-600 hover:bg-[#faf6f0] border border-[#e4dcd0] px-6 py-3 rounded-full font-medium text-xs tracking-wider uppercase transition-all shadow-sm">
                             ⚡ Breathing Science
+                        </button>
+                        <button onclick="switchEducationTab('safe')" data-sub="safe" class="edu-sub-btn bg-white text-stone-600 hover:bg-[#faf6f0] border border-[#e4dcd0] px-6 py-3 rounded-full font-medium text-xs tracking-wider uppercase transition-all shadow-sm">
+                            🏞️ Safe Place
                         </button>
                     </div>
                 </div>
@@ -554,6 +557,150 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="edu-safe" class="edu-sub-section hidden space-y-4">
+                    <div class="mb-6 bg-[#faf6f0] p-6 rounded-2xl border border-[#e4dcd0]/60 shadow-sm">
+                        <h3 class="text-lg font-normal text-stone-900">Safe Place Imagery</h3>
+                        <p class="text-sm text-stone-500 mt-2 leading-relaxed">A safe place is a calming image you can return to in your mind whenever you need comfort. Click on each topic below to learn where it comes from, why it works, and how to build and practice your own.</p>
+                        <button onclick="navigateTo('safe-place')" class="mt-4 bg-stone-900 text-[#fcfbfa] px-5 py-2.5 rounded-full text-[11px] uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Try the Safe Place exercise →</button>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="0">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🏞️</div>
+                                <span class="text-lg font-normal text-stone-900">What Is a Safe Place?</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed">
+                                <p class="mb-4">A safe place is a calming picture you build in your mind: a real or imagined place where you feel peaceful, protected, and at ease. Once it is built, you can return to it in your imagination whenever you need comfort.</p>
+                                <p class="mb-4">The exercise comes from EMDR therapy, where it is called the Calm or Safe Place. Schema therapy uses safe-place imagery in a similar way.</p>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">💡</span>
+                                    <p class="text-xs text-stone-600"><strong>Where It Fits:</strong> Therapists often teach the safe place early on, before working on painful memories, so you have a steady place to come back to if things feel like too much.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="1">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🧠</div>
+                                <span class="text-lg font-normal text-stone-900">Why It Helps</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed">
+                                <p class="mb-4">Your brain and body respond to vivid imagery in many of the same ways they respond to real experiences. Picturing a calm place in detail can slow your breathing, ease muscle tension, and bring on the body’s relaxation response.</p>
+                                <p class="mb-4">It also reminds you that you can choose where to put your attention, which can make strong feelings feel more manageable.</p>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">💡</span>
+                                    <p class="text-xs text-stone-600"><strong>Somatic Insight:</strong> The more senses you bring in — sights, sounds, smells, and textures — the more real the place feels and the stronger the calming effect.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🎨</div>
+                                <span class="text-lg font-normal text-stone-900">Choosing & Building Your Place</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed">
+                                <p class="mb-4">Pick a place that feels calm and safe. It can be somewhere you have been, like a beach or a favorite room, or somewhere you make up entirely. Then fill it in with your senses:</p>
+                                <ul class="list-disc pl-5 space-y-1.5 mb-4">
+                                    <li><strong>See:</strong> colors, light, shapes, what is near and far</li>
+                                    <li><strong>Hear:</strong> waves, wind, birds, or quiet</li>
+                                    <li><strong>Smell:</strong> fresh air, pine, the ocean, something cozy</li>
+                                    <li><strong>Touch:</strong> temperature, a breeze, what you are resting on</li>
+                                    <li><strong>Feel:</strong> the emotions that come up and where you notice them in your body</li>
+                                </ul>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">💡</span>
+                                    <p class="text-xs text-stone-600"><strong>Choosing Tip:</strong> Choose a place with no ties to hard memories, and leave other people out of it for now, since even people you love can bring up mixed feelings. Imaginary places often work best.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="3">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🦋</div>
+                                <span class="text-lg font-normal text-stone-900">The Butterfly Hug</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed">
+                                <p class="mb-4">The butterfly hug is a simple self-soothing technique developed by EMDR therapists. Cross your arms over your chest so each hand rests near the opposite shoulder, then slowly tap left, right, left, right while you hold the image of your safe place and its good feelings.</p>
+                                <p class="mb-4">Tap about 4 to 6 times, then pause and take a breath.</p>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">💡</span>
+                                    <p class="text-xs text-stone-600"><strong>Keep It Slow:</strong> Slow, gentle taps help strengthen the calm. If anything unpleasant shows up while tapping, stop and simply rest in your place or open your eyes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🔑</div>
+                                <span class="text-lg font-normal text-stone-900">Your Cue Word & Daily Practice</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed">
+                                <p class="mb-4">Give your safe place a word or short phrase, like “Sunset” or “Cabin.” Say it to yourself while you picture the place and notice the calm. Over time, the word alone can help bring the feeling back.</p>
+                                <p class="mb-4">Practice once a day when you are already fairly calm. The more you practice, the faster you can reach your safe place when you need it.</p>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">💡</span>
+                                    <p class="text-xs text-stone-600"><strong>Start Small:</strong> Try using your safe place with small, everyday stresses first. As it gets stronger, it becomes easier to use when feelings run high.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-[#e4dcd0]/60 overflow-hidden shadow-sm hover:shadow-md transition-all">
+                        <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" data-idx="5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#faf6f0] text-stone-600 flex items-center justify-center text-lg border border-[#e4dcd0]/40">🛡️</div>
+                                <span class="text-lg font-normal text-stone-900">When to Pause</span>
+                            </div>
+                            <span class="text-xl text-stone-400 indicator">＋</span>
+                        </button>
+                        <div class="accordion-content max-h-0 opacity-0 px-6 transition-height">
+                            <div class="pb-6 pt-2 text-stone-600 border-t border-[#e4dcd0]/40 mt-2 text-sm leading-relaxed">
+                                <p class="mb-4">Sometimes an upsetting memory, image, or feeling can slip into a safe place, or the place itself starts to feel different. If that happens:</p>
+                                <ul class="list-disc pl-5 space-y-1.5 mb-4">
+                                    <li>Open your eyes and look around the room you are in.</li>
+                                    <li>Take a slow breath and feel your feet on the floor.</li>
+                                    <li>Try a different place another time — an imaginary one is often easier.</li>
+                                    <li>Let your therapist know, so you can work on it together.</li>
+                                </ul>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                                    <span class="text-base">💡</span>
+                                    <p class="text-xs text-stone-600"><strong>That’s Okay:</strong> Imagery doesn’t come easily for everyone. If a safe place isn’t working for you right now, other grounding skills like sensory grounding or paced breathing can help too.</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mt-4">
+                                    <button onclick="navigateTo('safe-place')" class="bg-white border border-[#e4dcd0] text-stone-700 hover:bg-[#faf6f0] px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Safe Place →</button>
+                                    <button onclick="navigateTo('sensory')" class="bg-white border border-[#e4dcd0] text-stone-700 hover:bg-[#faf6f0] px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Sensory Grounding →</button>
+                                    <button onclick="navigateTo('breathing')" class="bg-white border border-[#e4dcd0] text-stone-700 hover:bg-[#faf6f0] px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Bubble Breathing →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
