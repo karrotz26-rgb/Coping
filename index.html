@@ -78,6 +78,7 @@
                             <button data-target="sensory" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Sensory Grounding</button>
                             <button data-target="breathing" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Bubble Breathing</button>
                             <button data-target="safe-place" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Safe Place</button>
+                            <button data-target="body-map" class="nav-btn block w-full text-left px-4 py-2.5 text-stone-600 hover:text-stone-900 hover:bg-[#faf6f0] transition-colors">Color Your Emotions</button>
                         </div>
                     </div>
                     <button data-target="cbt-guide" class="nav-btn nav-link py-7 border-b-2 border-transparent hover:text-stone-900 transition-colors">CBT Guide</button>
@@ -114,6 +115,7 @@
                     <button data-target="sensory" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Sensory Grounding</button>
                     <button data-target="breathing" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Bubble Breathing</button>
                     <button data-target="safe-place" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Safe Place</button>
+                    <button data-target="body-map" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">Color Your Emotions</button>
                 </div>
             </div>
             <button data-target="cbt-guide" class="nav-btn block w-full text-left py-2 text-stone-600 hover:text-stone-900 font-medium">CBT Guide</button>
@@ -193,6 +195,12 @@
                             <h3 class="font-normal text-xl text-stone-900 mb-2">Safe Place</h3>
                             <p class="text-sm text-stone-500 leading-relaxed">Picture a place where you feel calm and safe, fill it in with all your senses, and give it a cue word so you can return there whenever you need to.</p>
                             <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Find your safe place →</span>
+                        </button>
+                        <button data-home-target="body-map" class="home-link group text-left bg-white p-6 rounded-2xl border border-[#e4dcd0]/50 shadow-sm hover:shadow-md hover:border-[#8c7e6e]/50 transition">
+                            <div class="text-2xl mb-3">🎨</div>
+                            <h3 class="font-normal text-xl text-stone-900 mb-2">Color Your Emotions</h3>
+                            <p class="text-sm text-stone-500 leading-relaxed">Name what you are feeling, give each emotion a color, and paint where you feel it on a body outline. A mindful way to check in with yourself.</p>
+                            <span class="inline-block mt-4 text-sm font-medium text-[#8c7e6e] group-hover:text-stone-900">Start coloring →</span>
                         </button>
                     </div>
                 </div>
@@ -1722,6 +1730,174 @@
             </div>
         </section>
 
+        <section id="body-map" class="view-section hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-normal text-stone-900 mb-4">Color Your Emotions</h2>
+                    <p class="text-stone-600 text-base">
+                        A mindful body check-in. Naming what you feel and noticing where it lives in your body helps you step back from an emotion and see it more clearly, instead of being swept away by it.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-[#e4dcd0] p-8 md:p-14 relative overflow-hidden">
+
+                    <div id="bm-step-0" class="bm-step text-center space-y-8">
+                        <div class="w-28 h-28 bg-[#faf6f0] border border-[#e4dcd0]/70 rounded-full mx-auto flex items-center justify-center breathe-animation">
+                            <span class="text-3xl">🎨</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-normal text-stone-900 mb-3">Notice, Name, and Color</h3>
+                            <p class="text-stone-500 text-sm leading-relaxed">Take a slow breath and turn your attention inward. You'll name the emotions you notice, give each one a color, and paint where you feel it in your body. There are no right or wrong answers — just notice what is there, with curiosity instead of judgment.</p>
+                        </div>
+                        <button onclick="cbtGoTo('bm', 1)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-stone-800 transition-colors shadow-sm">Begin Check-In</button>
+                    </div>
+
+                    <div id="bm-step-1" class="bm-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">1</span>
+                            <span>Name Your Emotions</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">💭 What are you feeling right now?</h3>
+                        <p class="text-sm text-stone-500">Tap each emotion you notice, or add your own. Then choose a color for each one and rate how strong it feels.</p>
+                        <div id="bm-emotion-chips" class="flex flex-wrap gap-2 mt-6"></div>
+                        <div class="flex gap-3 items-end">
+                            <input type="text" id="bm-custom-emotion" maxlength="24" class="flex-1 text-base p-3 border-b border-stone-200 focus:border-stone-900 outline-none bg-transparent text-stone-800 transition-colors" placeholder="Add another emotion…">
+                            <button onclick="addCustomBodyMapEmotion()" class="border border-stone-300 text-stone-600 px-5 py-2.5 rounded-full text-[11px] uppercase tracking-wider font-medium hover:bg-stone-50 transition-all">+ Add</button>
+                        </div>
+                        <div id="bm-emotion-list" class="space-y-3"></div>
+                        <p id="bm-emotion-error" class="hidden text-xs text-[#a0522d]">Choose at least one emotion to continue.</p>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('bm', 0)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="goToBodyMapPainting()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="bm-step-2" class="bm-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">2</span>
+                            <span>Color Your Body</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🎨 Where do you feel it?</h3>
+                        <p class="text-sm text-stone-500">Pick an emotion, then paint the places in your body where you feel it. Use as much or as little color as fits — colors can overlap.</p>
+                        <div class="flex flex-col md:flex-row gap-8 items-center md:items-start mt-6">
+                            <div class="relative shrink-0 bg-white rounded-2xl border border-[#e4dcd0] p-3">
+                                <div id="bm-canvas-wrap" class="relative" style="width: 220px; aspect-ratio: 200 / 420;">
+                                    <canvas id="bm-base-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+                                    <canvas id="bm-paint-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+                                    <canvas id="bm-stroke-canvas" class="absolute inset-0 w-full h-full cursor-crosshair" style="touch-action: none; opacity: 0.6;" role="img" aria-label="Body outline to paint your emotions on"></canvas>
+                                </div>
+                            </div>
+                            <div class="w-full space-y-5">
+                                <div>
+                                    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Paint With</p>
+                                    <div id="bm-palette" class="flex flex-wrap gap-2"></div>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Brush Size</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <button onclick="setBodyMapBrush(5)" data-brush="5" class="bm-tool border border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0] px-3 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Small</button>
+                                        <button onclick="setBodyMapBrush(11)" data-brush="11" class="bm-tool border border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0] px-3 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Medium</button>
+                                        <button onclick="setBodyMapBrush(20)" data-brush="20" class="bm-tool border border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0] px-3 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Large</button>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <button onclick="undoBodyMap()" class="bm-tool border border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0] px-3 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">↶ Undo</button>
+                                    <button onclick="clearBodyMap()" class="bm-tool border border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0] px-3 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors">Clear All</button>
+                                </div>
+                                <p class="text-xs text-stone-400 italic">Painting stays inside the body outline. On a phone, use one finger to paint.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('bm', 1)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('bm', 3)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="bm-step-3" class="bm-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">3</span>
+                            <span>Breathe & Notice</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">🌬️ Breathe into the colors</h3>
+                        <p class="text-sm text-stone-500">Look at your body map. Take three slow breaths, imagining the breath moving into each colored area. Notice the sensations there — tight, heavy, warm, buzzing, still — without trying to change them.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="bm-notice" class="w-full h-28 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="e.g., The anxiety feels like a tight band across my chest. When I breathed into it, it loosened a little."></textarea>
+                        </div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl flex items-start gap-3 border border-[#e4dcd0]/30">
+                            <span class="text-base">🌊</span>
+                            <p class="text-xs text-stone-600 leading-relaxed"><strong>Remember:</strong> Emotions are like waves — they rise, peak, and pass. Noticing where they live in your body can make them feel less overwhelming.</p>
+                        </div>
+                        <div class="flex items-center gap-4 mt-8">
+                            <button onclick="cbtGoTo('bm', 2)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="cbtGoTo('bm', 4)" class="bg-stone-900 text-[#fcfbfa] px-8 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="bm-step-4" class="bm-step hidden space-y-6">
+                        <div class="flex items-center gap-3 text-stone-500 font-medium text-xs uppercase tracking-widest mb-2">
+                            <span class="bg-[#faf6f0] border border-[#e4dcd0]/60 text-stone-800 w-7 h-7 rounded-full flex items-center justify-center text-[11px]">✓</span>
+                            <span>Reflect & Share</span>
+                        </div>
+                        <h3 class="text-3xl font-normal text-stone-800">How do you feel now?</h3>
+                        <p class="text-sm text-stone-500">Notice whether anything has shifted since you started, then briefly record your experience to assemble your journal card.</p>
+                        <div class="space-y-4 mt-6">
+                            <textarea id="bm-reflection" class="w-full h-32 p-4 border border-stone-200 rounded-2xl focus:border-stone-900 outline-none bg-[#faf6f0]/30 resize-none text-stone-700 text-base leading-relaxed transition-all" placeholder="Naming my feelings and seeing them on the page made them feel more manageable…"></textarea>
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button onclick="cbtGoTo('bm', 3)" class="text-xs uppercase tracking-wider font-medium text-stone-400 hover:text-stone-700 transition-colors px-2 py-3">← Back</button>
+                            <button onclick="generateBodyMapCard()" class="bg-stone-900 text-[#fcfbfa] px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors shadow-sm flex-1">Generate Journal Card</button>
+                        </div>
+
+                        <div id="bm-card-preview-container" class="hidden mt-10 border border-[#e4dcd0] rounded-3xl p-6 bg-[#faf6f0]/40 space-y-4">
+                            <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest text-left">Preview of Your Entry</p>
+
+                            <div id="body-map-card" class="bg-white border border-[#e4dcd0] rounded-2xl p-6 relative overflow-hidden text-left shadow-sm">
+                                <div class="absolute top-[16px] right-[16px] opacity-15">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="12" fill="#234736"/>
+                                        <path d="M20 9.5L25 15H22.5L26.5 20H23.5L27.5 25H21V29H19V25H12.5L16.5 20H13.5L17.5 15H15L20 9.5Z" stroke="#FCFBFA" stroke-width="1.8" stroke-linejoin="round" fill="#234736"/>
+                                    </svg>
+                                </div>
+                                <div class="border-b border-[#e4dcd0]/60 pb-3 mb-4">
+                                    <h4 class="text-xl font-normal text-stone-900 serif-font pr-12">Color Your Emotions Entry</h4>
+                                    <p class="text-[10px] text-stone-400 uppercase tracking-wider font-semibold mt-1" id="bm-card-date"></p>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-5">
+                                    <img id="bm-card-image" alt="My colored body map" class="w-[140px] shrink-0">
+                                    <div class="w-full space-y-3 text-xs text-stone-600 leading-relaxed">
+                                        <p class="font-bold">🎨 My Emotions:</p>
+                                        <div id="bm-card-legend" class="space-y-2"></div>
+                                        <p class="whitespace-pre-line pt-2"><strong>🌬️ What I Noticed:</strong> <span id="bm-card-notice" class="text-stone-800 font-medium"></span></p>
+                                    </div>
+                                </div>
+                                <div class="bg-[#faf6f0] p-4 rounded-xl border border-[#e4dcd0]/50 mb-4">
+                                    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-1">My Reflection</p>
+                                    <p class="text-stone-700 italic text-sm leading-relaxed whitespace-pre-line" id="bm-card-reflection"></p>
+                                </div>
+                                <p class="text-[9px] text-center text-stone-400 font-medium tracking-widest uppercase">✦ THOUGHT JOURNAL GROUNDING SYSTEM</p>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="shareBodyMapCard()" class="bg-stone-900 text-[#fcfbfa] px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-800 transition-colors flex-1 flex items-center justify-center gap-2">
+                                    🖼️ Save Card
+                                </button>
+                                <button onclick="finishBodyMap()" class="border border-stone-300 text-stone-600 px-6 py-3 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-stone-50 transition-all flex-1">
+                                    Finish & Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-between items-center border-t border-stone-100 pt-6">
+                        <div class="text-[10px] font-bold text-stone-400 tracking-widest uppercase" id="bm-progress-text">Step 0 of 4</div>
+                        <div class="w-32 h-1 bg-stone-100 rounded-full overflow-hidden">
+                            <div id="bm-progress-bar" class="h-full bg-[#8c7e6e] w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="thought-record" class="view-section hidden">
             <div class="max-w-3xl mx-auto">
                 <div class="text-center mb-12">
@@ -2492,7 +2668,7 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const practiceMenuBtn = document.getElementById('practice-menu-btn');
         const practiceDropdown = document.getElementById('practice-dropdown');
-        const practiceTargets = ['practice', 'sensory', 'breathing', 'safe-place'];
+        const practiceTargets = ['practice', 'sensory', 'breathing', 'safe-place', 'body-map'];
         const cbtMenuBtn = document.getElementById('cbt-menu-btn');
         const cbtDropdown = document.getElementById('cbt-dropdown');
         const cbtTargets = ['thought-record', 'test-thoughts', 'core-belief', 'coping-cards'];
@@ -2948,7 +3124,7 @@
         }
 
         // --- CBT Skills Worksheets ---
-        const cbtStepTotals = { tr: 5, tt: 10, cb: 3, cc: 2, sp: 7 };
+        const cbtStepTotals = { tr: 5, tt: 10, cb: 3, cc: 2, sp: 7, bm: 4 };
 
         function cbtGoTo(prefix, stepNumber) {
             document.querySelectorAll(`.${prefix}-step`).forEach(el => el.classList.add('hidden'));
@@ -3007,6 +3183,350 @@
             document.getElementById(`${prefix}-card-preview-container`).classList.add('hidden');
             cbtGoTo(prefix, 0);
         }
+
+        // Color Your Emotions (mindful body map)
+        const bodyMapPresets = [
+            { name: 'Happy', color: '#f2c94c' },
+            { name: 'Calm', color: '#7fb8a4' },
+            { name: 'Hopeful', color: '#8cc084' },
+            { name: 'Loved', color: '#e98bb0' },
+            { name: 'Sad', color: '#6b8fc7' },
+            { name: 'Anxious', color: '#f2994a' },
+            { name: 'Angry', color: '#d9534f' },
+            { name: 'Scared', color: '#9b7bc4' },
+            { name: 'Ashamed', color: '#a1887f' },
+            { name: 'Lonely', color: '#8fa3b8' },
+            { name: 'Tired', color: '#a8a29e' },
+            { name: 'Numb', color: '#cbd5e1' }
+        ];
+        const bodyMapExtraColors = ['#4fb3bf', '#c0ca33', '#ff8a65', '#7986cb', '#ba68c8', '#4db6ac'];
+        const BODY_MAP_MAX_EMOTIONS = 8;
+        const BODY_W = 200, BODY_H = 420, BODY_SCALE = 2;
+        const bodyMapParts = [
+            'M100 10 C117 10 126 24 126 42 C126 60 117 74 100 74 C83 74 74 60 74 42 C74 24 83 10 100 10 Z',
+            'M90 66 L110 66 L112 92 L88 92 Z',
+            'M60 92 Q100 82 140 92 Q154 96 152 122 L146 200 Q144 232 142 250 L58 250 Q56 232 54 200 L48 122 Q46 96 60 92 Z',
+            'M60 92 Q44 94 40 118 L24 232 Q21 250 30 256 Q40 258 42 242 L58 140 Z',
+            'M140 92 Q156 94 160 118 L176 232 Q179 250 170 256 Q160 258 158 242 L142 140 Z',
+            'M60 244 L99 244 L96 396 Q96 410 84 410 L72 410 Q64 408 66 396 L58 252 Z',
+            'M140 244 L101 244 L104 396 Q104 410 116 410 L128 410 Q136 408 134 396 L142 252 Z'
+        ].map(d => new Path2D(d));
+
+        let bodyMapEmotions = [];
+        let bodyMapActive = null; // index into bodyMapEmotions, or 'eraser'
+        let bodyMapBrush = 11;
+        let bodyMapUndo = [];
+        let bodyMapLastPoint = null;
+
+        const bmBase = document.getElementById('bm-base-canvas');
+        const bmPaint = document.getElementById('bm-paint-canvas');
+        const bmStroke = document.getElementById('bm-stroke-canvas');
+        const bmMask = document.createElement('canvas');
+        [bmBase, bmPaint, bmStroke, bmMask].forEach(c => {
+            c.width = BODY_W * BODY_SCALE;
+            c.height = BODY_H * BODY_SCALE;
+        });
+        const bmPaintCtx = bmPaint.getContext('2d');
+        const bmStrokeCtx = bmStroke.getContext('2d');
+
+        function drawBodyMapBase() {
+            const ctx = bmBase.getContext('2d');
+            ctx.setTransform(BODY_SCALE, 0, 0, BODY_SCALE, 0, 0);
+            // Stroke every part, then fill every part: inner seams are covered,
+            // leaving one clean outline around the whole body.
+            ctx.strokeStyle = '#8c7e6e';
+            ctx.lineWidth = 5;
+            ctx.lineJoin = 'round';
+            bodyMapParts.forEach(p => ctx.stroke(p));
+            ctx.fillStyle = '#fcfbfa';
+            bodyMapParts.forEach(p => ctx.fill(p));
+
+            const maskCtx = bmMask.getContext('2d');
+            maskCtx.setTransform(BODY_SCALE, 0, 0, BODY_SCALE, 0, 0);
+            maskCtx.fillStyle = '#000';
+            bodyMapParts.forEach(p => maskCtx.fill(p));
+        }
+
+        function clipToBody(ctx) {
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.drawImage(bmMask, 0, 0);
+            ctx.restore();
+        }
+
+        function bodyMapPoint(e) {
+            const rect = bmStroke.getBoundingClientRect();
+            return {
+                x: (e.clientX - rect.left) * BODY_W / rect.width,
+                y: (e.clientY - rect.top) * BODY_H / rect.height
+            };
+        }
+
+        function bodyMapColor() {
+            if (bodyMapActive === 'eraser') return '#78716c';
+            return bodyMapEmotions[bodyMapActive]?.color;
+        }
+
+        function drawBodyMapSegment(from, to) {
+            bmStrokeCtx.setTransform(BODY_SCALE, 0, 0, BODY_SCALE, 0, 0);
+            bmStrokeCtx.strokeStyle = bodyMapColor();
+            bmStrokeCtx.lineWidth = bodyMapBrush;
+            bmStrokeCtx.lineCap = 'round';
+            bmStrokeCtx.lineJoin = 'round';
+            bmStrokeCtx.beginPath();
+            bmStrokeCtx.moveTo(from.x, from.y);
+            bmStrokeCtx.lineTo(to.x, to.y);
+            bmStrokeCtx.stroke();
+            clipToBody(bmStrokeCtx);
+        }
+
+        bmStroke.addEventListener('pointerdown', (e) => {
+            if (bodyMapActive === null || !bodyMapColor()) return;
+            e.preventDefault();
+            bmStroke.setPointerCapture(e.pointerId);
+            bodyMapLastPoint = bodyMapPoint(e);
+            drawBodyMapSegment(bodyMapLastPoint, bodyMapLastPoint);
+        });
+
+        bmStroke.addEventListener('pointermove', (e) => {
+            if (!bodyMapLastPoint) return;
+            const point = bodyMapPoint(e);
+            drawBodyMapSegment(bodyMapLastPoint, point);
+            bodyMapLastPoint = point;
+        });
+
+        function commitBodyMapStroke() {
+            if (!bodyMapLastPoint) return;
+            bodyMapLastPoint = null;
+
+            bodyMapUndo.push(bmPaintCtx.getImageData(0, 0, bmPaint.width, bmPaint.height));
+            if (bodyMapUndo.length > 25) bodyMapUndo.shift();
+
+            bmPaintCtx.save();
+            bmPaintCtx.setTransform(1, 0, 0, 1, 0, 0);
+            if (bodyMapActive === 'eraser') {
+                bmPaintCtx.globalCompositeOperation = 'destination-out';
+            } else {
+                // Translucent strokes so overlapping emotions blend.
+                bmPaintCtx.globalAlpha = 0.6;
+            }
+            bmPaintCtx.drawImage(bmStroke, 0, 0);
+            bmPaintCtx.restore();
+
+            bmStrokeCtx.setTransform(1, 0, 0, 1, 0, 0);
+            bmStrokeCtx.clearRect(0, 0, bmStroke.width, bmStroke.height);
+        }
+
+        bmStroke.addEventListener('pointerup', commitBodyMapStroke);
+        bmStroke.addEventListener('pointercancel', commitBodyMapStroke);
+
+        function undoBodyMap() {
+            const previous = bodyMapUndo.pop();
+            if (previous) bmPaintCtx.putImageData(previous, 0, 0);
+        }
+
+        function clearBodyMap() {
+            bodyMapUndo.push(bmPaintCtx.getImageData(0, 0, bmPaint.width, bmPaint.height));
+            bmPaintCtx.clearRect(0, 0, bmPaint.width, bmPaint.height);
+        }
+
+        function setToolActive(btn, active) {
+            btn.classList.toggle('bg-stone-900', active);
+            btn.classList.toggle('text-white', active);
+            btn.classList.toggle('border-stone-900', active);
+            btn.classList.toggle('bg-white', !active);
+            btn.classList.toggle('text-stone-600', !active);
+        }
+
+        function setBodyMapBrush(size) {
+            bodyMapBrush = size;
+            document.querySelectorAll('[data-brush]').forEach(btn => {
+                setToolActive(btn, Number(btn.dataset.brush) === size);
+            });
+        }
+
+        function swatch(color, size = 'w-3.5 h-3.5') {
+            const dot = document.createElement('span');
+            dot.className = `inline-block ${size} rounded-full border border-black/10 shrink-0`;
+            dot.style.backgroundColor = color;
+            return dot;
+        }
+
+        function toggleBodyMapEmotion(name, color) {
+            const index = bodyMapEmotions.findIndex(em => em.name.toLowerCase() === name.toLowerCase());
+            if (index >= 0) {
+                bodyMapEmotions.splice(index, 1);
+            } else if (bodyMapEmotions.length < BODY_MAP_MAX_EMOTIONS) {
+                bodyMapEmotions.push({ name, color, intensity: 5 });
+            }
+            renderBodyMapEmotions();
+        }
+
+        function addCustomBodyMapEmotion() {
+            const input = document.getElementById('bm-custom-emotion');
+            const name = input.value.trim();
+            if (!name) return;
+            const exists = bodyMapEmotions.some(em => em.name.toLowerCase() === name.toLowerCase());
+            if (!exists) {
+                const preset = bodyMapPresets.find(p => p.name.toLowerCase() === name.toLowerCase());
+                const used = new Set(bodyMapEmotions.map(em => em.color));
+                const color = preset?.color || bodyMapExtraColors.find(c => !used.has(c)) || bodyMapExtraColors[0];
+                toggleBodyMapEmotion(preset?.name || name, color);
+            }
+            input.value = '';
+        }
+
+        document.getElementById('bm-custom-emotion').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') addCustomBodyMapEmotion();
+        });
+
+        function renderBodyMapEmotions() {
+            const chips = document.getElementById('bm-emotion-chips');
+            chips.innerHTML = '';
+            bodyMapPresets.forEach(preset => {
+                const selected = bodyMapEmotions.some(em => em.name === preset.name);
+                const chip = document.createElement('button');
+                chip.className = 'flex items-center gap-2 px-4 py-2 rounded-full border text-sm transition-colors ' +
+                    (selected ? 'border-stone-900 bg-stone-900 text-white' : 'border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0]');
+                chip.append(swatch(preset.color), document.createTextNode(preset.name));
+                chip.setAttribute('aria-pressed', selected);
+                chip.addEventListener('click', () => toggleBodyMapEmotion(preset.name, preset.color));
+                chips.appendChild(chip);
+            });
+
+            const list = document.getElementById('bm-emotion-list');
+            list.innerHTML = '';
+            bodyMapEmotions.forEach((emotion, index) => {
+                const row = document.createElement('div');
+                row.className = 'bg-[#faf6f0]/60 border border-[#e4dcd0]/60 rounded-2xl p-4 flex flex-wrap items-center gap-4';
+
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.value = emotion.color;
+                colorInput.className = 'w-10 h-10 rounded-full cursor-pointer border-0 bg-transparent p-0';
+                colorInput.setAttribute('aria-label', `Color for ${emotion.name}`);
+                colorInput.addEventListener('input', () => { emotion.color = colorInput.value; });
+
+                const name = document.createElement('p');
+                name.className = 'font-medium text-stone-800 w-24';
+                name.textContent = emotion.name;
+
+                const sliderWrap = document.createElement('div');
+                sliderWrap.className = 'flex-1 min-w-[160px]';
+                const label = document.createElement('div');
+                label.className = 'flex justify-between text-xs text-stone-500 mb-1';
+                const labelText = document.createElement('span');
+                labelText.textContent = 'How strong?';
+                const value = document.createElement('span');
+                value.className = 'font-semibold text-stone-800';
+                value.textContent = `${emotion.intensity}/10`;
+                label.append(labelText, value);
+                const slider = document.createElement('input');
+                slider.type = 'range';
+                slider.min = 0;
+                slider.max = 10;
+                slider.value = emotion.intensity;
+                slider.className = 'cbt-range w-full';
+                slider.setAttribute('aria-label', `How strong is ${emotion.name}`);
+                slider.addEventListener('input', () => {
+                    emotion.intensity = Number(slider.value);
+                    value.textContent = `${emotion.intensity}/10`;
+                });
+                sliderWrap.append(label, slider);
+
+                const remove = document.createElement('button');
+                remove.className = 'text-stone-300 hover:text-stone-700 text-sm';
+                remove.setAttribute('aria-label', `Remove ${emotion.name}`);
+                remove.textContent = '✕';
+                remove.addEventListener('click', () => {
+                    bodyMapEmotions.splice(index, 1);
+                    renderBodyMapEmotions();
+                });
+
+                row.append(colorInput, name, sliderWrap, remove);
+                list.appendChild(row);
+            });
+
+            if (bodyMapEmotions.length) document.getElementById('bm-emotion-error').classList.add('hidden');
+        }
+
+        function renderBodyMapPalette() {
+            const palette = document.getElementById('bm-palette');
+            palette.innerHTML = '';
+            const tools = bodyMapEmotions.map((emotion, index) => ({ key: index, label: emotion.name, color: emotion.color }));
+            tools.push({ key: 'eraser', label: 'Eraser' });
+
+            tools.forEach(tool => {
+                const btn = document.createElement('button');
+                btn.className = 'border border-[#e4dcd0] bg-white text-stone-600 hover:bg-[#faf6f0] px-3 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium transition-colors flex items-center gap-2';
+                if (tool.color) btn.appendChild(swatch(tool.color, 'w-4 h-4'));
+                btn.appendChild(document.createTextNode(tool.key === 'eraser' ? '⌫ Eraser' : tool.label));
+                setToolActive(btn, bodyMapActive === tool.key);
+                btn.addEventListener('click', () => {
+                    bodyMapActive = tool.key;
+                    renderBodyMapPalette();
+                });
+                palette.appendChild(btn);
+            });
+        }
+
+        function goToBodyMapPainting() {
+            if (!bodyMapEmotions.length) {
+                document.getElementById('bm-emotion-error').classList.remove('hidden');
+                return;
+            }
+            if (bodyMapActive !== 'eraser' && !bodyMapEmotions[bodyMapActive]) bodyMapActive = 0;
+            renderBodyMapPalette();
+            cbtGoTo('bm', 2);
+        }
+
+        function generateBodyMapCard() {
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = bmBase.width;
+            exportCanvas.height = bmBase.height;
+            const ctx = exportCanvas.getContext('2d');
+            ctx.drawImage(bmBase, 0, 0);
+            ctx.drawImage(bmPaint, 0, 0);
+            document.getElementById('bm-card-image').src = exportCanvas.toDataURL('image/png');
+
+            const legend = document.getElementById('bm-card-legend');
+            legend.innerHTML = '';
+            bodyMapEmotions.forEach(emotion => {
+                const row = document.createElement('p');
+                row.className = 'flex items-center gap-2';
+                const text = document.createElement('span');
+                text.className = 'text-stone-800 font-medium';
+                text.textContent = `${emotion.name} — ${emotion.intensity}/10`;
+                row.append(swatch(emotion.color), text);
+                legend.appendChild(row);
+            });
+
+            document.getElementById('bm-card-notice').innerText = cbtValue('bm-notice');
+            document.getElementById('bm-card-reflection').innerText = cbtValue('bm-reflection', 'Named my emotions, gave each one a color, and noticed where I feel them in my body.');
+
+            showCbtPreview('bm');
+        }
+
+        async function shareBodyMapCard() {
+            await exportCardAsPng('body-map-card', 'color-your-emotions-entry.png', 'My Color Your Emotions Entry');
+        }
+
+        function finishBodyMap() {
+            // Clear the emotion rows first: their sliders have no ids, so the
+            // shared worksheet reset below must not see them.
+            bodyMapEmotions = [];
+            bodyMapActive = null;
+            bodyMapUndo = [];
+            renderBodyMapEmotions();
+            bmPaintCtx.clearRect(0, 0, bmPaint.width, bmPaint.height);
+            resetCbtWorksheet('body-map', 'bm');
+            navigateTo('overview');
+        }
+
+        drawBodyMapBase();
+        setBodyMapBrush(11);
+        renderBodyMapEmotions();
 
         // Safe Place (EMDR / schema therapy imagery)
         function generateSafePlaceCard() {
